@@ -1,2 +1,20 @@
-# tv-kitchen
-TV Kitchen is a playground that turns TV into data (transcripts, facial recognition, etc.) so that newsrooms can help their staff and readers better understand what is happening across various local and cable TV news outlets.
+# TV Kitchen
+
+The [TV Kitchen](https://tv.kitchen) is a playground that turns TV into data (transcripts, facial recognition, etc.) so that newsrooms can help their staff and readers better understand what is happening across various local and cable TV news outlets.
+
+## Setting up the project
+
+If you are interested in running the TV Kitchen as a developer please review our [install instructions](docs/INSTALL.md).
+
+If you are interested in running the TV Kitchen as a user please visit [our website](https://tv.kitchen).
+
+## Participating
+
+TV Kitchen is an open source project, and we welcome contributions of any kind.
+
+Thank you for considering, and before diving in please follow these steps:
+
+* **Step 1:** read our [code of conduct](docs/CODE_OF_CONDUCT.md).
+* **Step 2:** review our [contribution guide](docs/CONTRIBUTING.md).
+* **Step 3:** make sure your contribution is [related to an issue](https://github.com/tvkitchen/tv-kitchen/issues).
+
