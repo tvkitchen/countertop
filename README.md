@@ -17,4 +17,4 @@ Thank you for considering, and before diving in please follow these steps:
 * **Step 1:** read our [code of conduct](docs/CODE_OF_CONDUCT.md).
 * **Step 2:** review our [contribution guide](docs/CONTRIBUTING.md).
 * **Step 3:** make sure your contribution is [related to an issue](https://github.com/tvkitchen/tv-kitchen/issues).
-
+* **Step 4:** review these [testing best practices](https://github.com/goldbergyoni/javascript-testing-best-practices).
