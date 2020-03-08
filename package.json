@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "lint": "./node_modules/.bin/eslint 'src/**/*.js'",
+    "start": "yarn babel-node src/index.js",
     "test": "jest"
   },
   "repository": {
