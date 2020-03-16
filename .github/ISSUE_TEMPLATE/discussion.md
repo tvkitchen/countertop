@@ -9,8 +9,8 @@ assignees: ''
 
 ## Discussion
 
-**What do you want to talk about?**
+#### What do you want to talk about?
 A clear and concise description of the discussion you want, and why you want it.
 
-**Relevant resources**
+#### Relevant Resources / Research
 A list of anything you think someone should look at in order to engage.
