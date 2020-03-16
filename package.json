@@ -4,6 +4,7 @@
   "description": "TV Kitchen is a playground that turns TV into data (transcripts, facial recognition, etc.) so that newsrooms can help their staff and readers better understand what is happening across various local and cable TV news outlets.",
   "main": "index.js",
   "scripts": {
+    "lint": "./node_modules/.bin/eslint 'src/**/*.js'",
     "test": "jest"
   },
   "repository": {
@@ -28,5 +29,12 @@
   "dependencies": {
     "jest": "^25.1.0",
     "nock": "^12.0.2"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.19.0"
   }
 }
