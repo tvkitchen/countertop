@@ -49,5 +49,8 @@
   },
   "engines": {
     "node": ">=13.10"
+  },
+  "_moduleAliases": {
+    "$root": "src"
   }
 }
