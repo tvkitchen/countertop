@@ -9,3 +9,10 @@ Follow these steps to set up the project on a new development machine. Instructi
 ```$shell
 yarn install
 ```
+
+2. Create your local configuration
+
+```$shell
+cp .env.template .env
+vi .env
+```
