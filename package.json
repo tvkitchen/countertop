@@ -52,6 +52,6 @@
     "node": ">=13.10"
   },
   "_moduleAliases": {
-    "$root": "src"
+    "%src": "./src"
   }
 }
