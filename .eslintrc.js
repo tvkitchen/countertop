@@ -8,7 +8,7 @@ const extractModuleAliasesFromPackage = (package) => {
 }
 const aliases = extractModuleAliasesFromPackage(package)
 const settings = {
-	"extends": "airbnb",
+	"extends": "airbnb-base",
 	"parser": "babel-eslint",
 	"rules": {
 		"semi": [2, "never"],
@@ -21,9 +21,6 @@ const settings = {
 		"jest": true
 	},
 	"settings": {
-		"react": {
-			"version": "latest"
-		},
 		"import/resolver": {
 			"alias": aliases
 		}
