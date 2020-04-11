@@ -4,7 +4,11 @@
   "description": "TV Kitchen is a playground that turns TV into data (transcripts, facial recognition, etc.) so that newsrooms can help their staff and readers better understand what is happening across various local and cable TV news outlets.",
   "main": "index.js",
   "scripts": {
+    "kafka": "yarn kafka:start",
+    "kafka:start": "./services/kafka/start.sh",
+    "kafka:stop": "./services/kafka/stop.sh",
     "lint": "./node_modules/.bin/eslint 'src/**/*.js'",
+    "sandbox": "babel-node -- src/scripts/_sandbox",
     "start": "yarn babel-node src/index.js",
     "test": "jest"
   },
@@ -30,6 +34,7 @@
   "dependencies": {
     "dotenv": "^8.2.0",
     "jest": "^25.1.0",
+    "kafkajs": "^1.12.0",
     "module-alias": "^2.2.2",
     "nock": "^12.0.2",
     "winston": "^3.2.1"

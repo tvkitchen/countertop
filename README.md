@@ -10,6 +10,20 @@ If you are interested in running the TV Kitchen as a developer please review our
 
 If you are interested in running the TV Kitchen as a user please visit [our website](https://tv.kitchen).
 
+## Starting the project
+
+1. If you are not already running your own instance of Kafka, start Kafka:
+
+```shell
+yarn kafka:start
+```
+
+2. Start the kitchen itself
+
+```shell
+yarn start
+```
+
 ## Participating
 
 TV Kitchen is an open source project, and we welcome contributions of any kind.
