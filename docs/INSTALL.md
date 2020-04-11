@@ -6,13 +6,26 @@ Follow these steps to set up the project on a new development machine. Instructi
 
 1. Install yarn packages
 
-```$shell
+```shell
 yarn install
 ```
 
-2. Create your local configuration
+2. Set up an instance of Kafka
 
-```$shell
+3. Create your local configuration
+
+```shell
 cp .env.template .env
 vi .env
 ```
+
+
+### Setting up Kafka
+
+This project uses Kafka. You can set up Kafka using whatever method you prefer, just configure the TV Kitchen to use your instance by populating `KAFKA_BROKERS` in `.env`.
+
+The repository provides a docker-based Kafka configuration as well for convenience.
+
+Running our provided setup requires [Docker Engine](https://docs.docker.com/engine/install/) and [Docker Compose](https://docs.docker.com/compose/install/).  Once docker is installed you can activate Kafka by typing `yarn kafka:start`.  You can also stop Kafka by typing `yarn kafka:stop`.
+
+NOTE: If you are using the docker Kafka, populate `KAFKA_BROKERS` in `.env` with the value `localhost:9092`.
