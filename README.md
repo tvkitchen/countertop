@@ -24,6 +24,23 @@ yarn kafka:start
 yarn start
 ```
 
+## Project Structure
+
+To understand the overall architecture of the project, please review our [architecture documentation](docs/ARCHITECTURE.md).
+
+The root structure is as follows:
+
+```
+- docs     // Project documentation
+- services // Convenience containers for various external services (e.g. Kafka)
+- src      // The primary code location itself
+| - components // Architectural components
+| - constants  // Constants used throughout the project
+| - lib        // Supporting code (e.g. utilities, DB singletons, etc)
+| - scripts    // Supporting scripts
+| - tests      // System-wide / integration tests
+```
+
 ## Participating
 
 TV Kitchen is an open source project, and we welcome contributions of any kind.
