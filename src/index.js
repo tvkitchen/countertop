@@ -1,4 +1,4 @@
 import 'module-alias/register'
-import logger from '%src/logger'
+import logger from '%src/lib/logger'
 
 logger.info('Started.')
