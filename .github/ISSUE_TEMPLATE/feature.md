@@ -2,7 +2,7 @@
 name: "\U0001F4A1 Feature Request"
 about: "I have a suggestion (and may want to implement it)!"
 title: ''
-labels: 'i: enhancement'
+labels: 'enhancement'
 assignees: ''
 
 ---

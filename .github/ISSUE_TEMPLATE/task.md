@@ -2,7 +2,7 @@
 name: "\U00002692 Team Task"
 about: "Something needs doing."
 title: ''
-labels: 'i: needs triage'
+labels: ''
 assignees: ''
 
 ---

@@ -2,7 +2,7 @@
 name: "\U0001F4AC Discussion"
 about: "I want to discuss a question or concept."
 title: ''
-labels: 'i: discussion'
+labels: 'discussion'
 assignees: ''
 
 ---
