@@ -56,5 +56,10 @@
   },
   "_moduleAliases": {
     "%src": "./src"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "^%src(.*)$": "<rootDir>/src$1"
+    }
   }
 }
