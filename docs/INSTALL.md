@@ -4,6 +4,7 @@
 
 - [Node.js](https://nodejs.org/). The required version of Node.js is documented in the `package.json`. We recommend installing a tool for managing versions of Node.js on your development machine; several of our contributors use [nvm](https://nvm.sh), though we don't specifically require it.
 - [Yarn](https://yarnpkg.com/) for package management.
+- [FFmpeg](https://ffmpeg.org/) for processing audio/video streams. Be sure FFmpeg is available in your `$PATH` so that Node.js can call it.
 
 Steps for installing prerequisites are excluded since different developers/environments will have different preferences. Follow your system-specific instructions for each prerequisite.
 
