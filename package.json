@@ -10,7 +10,8 @@
     "lint": "./node_modules/.bin/eslint 'src/**/*.js'",
     "sandbox": "babel-node -- src/scripts/_sandbox",
     "start": "yarn babel-node src/index.js",
-    "test": "jest"
+    "test": "jest",
+    "ingest:showInternalStreamPool": "babel-node -- src/scripts/showInternalStreamPool"
   },
   "repository": {
     "type": "git",
