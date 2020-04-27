@@ -1,24 +1,30 @@
 ## Install
 
-This project uses Node.js. The required version of Node.js is documented in the `package.json`. We recommend installing a tool for managing versions of Node.js on your development machine. Several of our contributors use [nvm](https://nvm.sh), though our project does not require it.
+### Prerequisites
 
-Follow these steps to set up the project on a new development machine. Instructions assume you have cloned the repository locally, have the proper version of Node.js set up, and are in the root directory of the project.
+- [Node.js](https://nodejs.org/). The required version of Node.js is documented in the `package.json`. We recommend installing a tool for managing versions of Node.js on your development machine; several of our contributors use [nvm](https://nvm.sh), though we don't specifically require it.
+- [Yarn](https://yarnpkg.com/) for package management.
 
-1. Install yarn packages
+Steps for installing prerequisites are excluded since different developers/environments will have different preferences. Follow your system-specific instructions for each prerequisite.
 
-```shell
-yarn install
-```
+### Installation
+
+Follow these steps to set up the project on a new development machine. Instructions assume you have installed prerequisites, cloned the repository locally, and are in the root directory of the project.
+
+1. Install packages:
+
+    ```shell
+    yarn install
+    ```
 
 2. Set up an instance of Kafka
 
 3. Create your local configuration
 
-```shell
-cp .env.template .env
-vi .env
-```
-
+    ```shell
+    cp .env.template .env
+    vi .env
+    ```
 
 ### Setting up Kafka
 
