@@ -1,12 +1,5 @@
-const package = require('./package.json')
+const { getModuleAliasesForESLint } = require('./lib/utils/moduleAlias')
 
-const extractModuleAliasesFromPackage = (package) => {
-	const aliasStems = Object.keys(package._moduleAliases)
-	return aliasStems.map(
-		(stem) => [stem, package._moduleAliases[stem]]
-	)
-}
-const aliases = extractModuleAliasesFromPackage(package)
 const settings = {
 	"extends": "airbnb-base",
 	"parser": "babel-eslint",
@@ -22,7 +15,7 @@ const settings = {
 	},
 	"settings": {
 		"import/resolver": {
-			"alias": aliases
+			"alias": getModuleAliasesForESLint()
 		}
 	}
 }
