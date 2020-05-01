@@ -5,17 +5,31 @@
 // out how to safely do so.
 // ------------------------------------------------------------------------------------------------
 
-// Given an array of items, returns a new array with only the unique items.
-//
-// TODO: This could have quite a bit more safety and error-checking built in.
+/**
+ * Given an array of items, returns a new array with only the unique items.
+ *
+ * TODO: This could have quite a bit more safety and error-checking built in.
+ *
+ * @param  {Array} array An array of elements.
+ * @return {Array}       The input array, reduced to unique elements.
+ */
 export const uniqueArray = (array) => [...new Set(array)]
 
-// Given two integers, generates all the integers in between.
-//
-// By default, will include the original two boundary integers. To exclude them, set
-// `inclusive: false` in the third (options) argument.
-//
-// This function does not do type coercion, so boundary arguments must be integers.
+/**
+ * Given two integers, generates all the integers in between. Works both low-high or high-low.
+ *
+ * By default, will include the original two boundary integers. To exclude them, set
+ * `inclusive: false` in the third (options) argument.
+ *
+ * This function does not do type coercion, so boundary arguments must be integers.
+ *
+ * @param  {Integer}         a         First number of the set.
+ * @param  {Integer}         b         Second number of the set.
+ * @param  {Object<Boolean>} inclusive If true, includes the boundary arguments in the resulting
+ *                                     integer list. If false, does not. Defaults true.
+ * @return {Array[Integer]}            Array of integers between (and optionally including) the two
+ *                                     numbers provided.
+ */
 export const generateIntegersBetween = (a, b, { inclusive = true } = {}) => {
 	// Bail out early if we weren't passed integers
 	if (!Number.isInteger(a) || !Number.isInteger(b)) {
@@ -56,23 +70,29 @@ export const generateIntegersBetween = (a, b, { inclusive = true } = {}) => {
 	return range
 }
 
-// Takes a string range like `"1-4"` and returns an array of boundary integers: `[1,4]`.
-//
-// If the string contains just a single number (no range), it will return a single-integer array.
-//
-// Strings containing multiple ranges, e.g. `"1-4-3"`, are officially unsupported, but it tries to
-// recover from it by returning the first and last elements of the range. (It does not use min/max
-// cleverness to pluck out the highest and lowest numbers in the string, because we support
-// reverse-order ranges such as `"6-1"`, and determining order intent from multiple-range strings
-// isn't compatible with this.)
-//
-// Examples:
-// - `"1"`   => `[1]`
-// - `"1-3"` => `[1,3]`
-// - `"3-1"` => `[3,1]`
-// - `"1-3-5"` => `[1,5]` // Don't do this!
-//
-// This method is not broadly useful, but it's still exported so we can test it.
+/**
+ * Takes a string range like `"1-4"` and returns an array of boundary integers: `[1,4]`.
+ *
+ * If the string contains just a single number (no range), it will return a single-integer array.
+ *
+ * Strings containing multiple ranges, e.g. `"1-4-3"`, are officially unsupported, but it tries to
+ * recover from it by returning the first and last elements of the range. (It does not use min/max
+ * cleverness to pluck out the highest and lowest numbers in the string, because we support
+ * reverse-order ranges such as `"6-1"`, and determining order intent from multiple-range strings
+ * isn't compatible with this.)
+ *
+ * Examples:
+ * - `"1"`   => `[1]`
+ * - `"1-3"` => `[1,3]`
+ * - `"3-1"` => `[3,1]`
+ * - `"1-3-5"` => `[1,5]` // Don't do this!
+ *
+ * This method is not broadly useful, but it's still exported so we can test it.
+ *
+ * @param  {String} range   A range of two numbers such as `"1-5"`.
+ * @return {Array[Integer]} An array of the two numbers in the range, or just one number if that's
+ *                          all that was provided.
+ */
 export const splitRangeToIntegers = (range) => {
 	let array = []
 	if (range.includes('-')) {
@@ -89,10 +109,16 @@ export const splitRangeToIntegers = (range) => {
 	return array.map((i) => parseInt(i, 10))
 }
 
-// Converts an integer range shorthand syntax to an array of unique integers.
-//
-// It receives a string like `"1-5,10-15,19"` and returns all the integers we think that range
-// intends to describe. In that case: `[1,2,3,4,5,10,11,12,13,14,15,19]`.
+/**
+ * Converts an integer range shorthand syntax to an array of unique integers.
+ *
+ * It receives a string like `"1-5,10-15,19"` and returns all the integers we think that range
+ * intends to describe. In that case: `[1,2,3,4,5,10,11,12,13,14,15,19]`.
+ *
+ * @param  {String} rangeShorthand Shorthand representation of a series of ranges, e.g.
+ *                                 `"1-5,10-15,19"`,
+ * @return {Array[Integer]}        An array of all the numbers determined to be desired.
+ */
 export const expandRangeOfIntegers = (rangeShorthand) => {
 	let expandedRange = []
 	rangeShorthand.split(',').forEach((segment) => {
