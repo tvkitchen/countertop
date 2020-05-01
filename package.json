@@ -11,6 +11,7 @@
     "sandbox": "babel-node -- src/scripts/_sandbox",
     "start": "yarn babel-node src/index.js",
     "test": "jest",
+    "ingest": "babel-node -- src/scripts/ingest",
     "ingest:showInternalStreamPool": "babel-node -- src/scripts/showInternalStreamPool"
   },
   "repository": {
