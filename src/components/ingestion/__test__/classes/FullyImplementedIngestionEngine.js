@@ -1,7 +1,12 @@
 import AbstractIngestionEngine from '../../AbstractIngestionEngine'
 
 class FullyImplementedIngestionEngine extends AbstractIngestionEngine {
-	// TODO: Populate the appropraite methods
+	constructor(readableStream) {
+		super()
+		this.readableStream = readableStream
+	}
+
+	getInputStream = () => this.readableStream
 }
 
 export default FullyImplementedIngestionEngine
