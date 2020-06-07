@@ -1112,20 +1112,20 @@
   dependencies:
     type-detect "4.0.8"
 
-"@tvkitchen/base-classes@1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@tvkitchen/base-classes/-/base-classes-1.0.0.tgz#ce35bc7883811a8e4fab6a8ecd094682d613973f"
-  integrity sha512-Tim6zStBawaz0vzD3oA+EzAV8k68bSYS+cOkqfc2PlspM+xbyWnqkLG4FfCd1wey5IOwbgZ970g4eGkmU9XtRA==
+"@tvkitchen/base-classes@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@tvkitchen/base-classes/-/base-classes-1.1.0.tgz#c74d79b4b1181e529d2ed7f0eb2f62e95b9781c8"
+  integrity sha512-t0ID7KzM1mwlWtZq9cJppuLKjpSWKo2VQl6ToKRWmf2T+6SwSaayE5ThSId1gGCn4JoBITUwF6HEwMpGvxfcGw==
 
-"@tvkitchen/base-constants@1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@tvkitchen/base-constants/-/base-constants-1.0.0.tgz#cf30d3f70e7f8fb5596eca9f6661dcecd69a9c92"
-  integrity sha512-pSTPmXvW9rxL2KAyrr0wYWGjw9X0l0KlqeUHSY/u/P1RQGqxlR3EUPk8d5VUvLEQIVCqBctCLij/zuWlo6uLew==
+"@tvkitchen/base-constants@^1.0.0":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@tvkitchen/base-constants/-/base-constants-1.0.1.tgz#f5f89ba22c55fb8ec57ee685cb5473ecf7893a31"
+  integrity sha512-i77NYp6qLX0DTy4cpm2uj3F9SA+g+Qt7I7dTsILJyWgKUIHjuF3Fl/3J+vWHY7RJ+W4Y2SQ28/E+2CV2quBg6A==
 
-"@tvkitchen/base-errors@1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@tvkitchen/base-errors/-/base-errors-1.0.0.tgz#771d37246c5c02004ed8c6e52a8b0b302f7b0475"
-  integrity sha512-orzqaZIyYpKcZkm+8/WQRa5FDV1ua8O2+vumL0z8MdjyBE1/AVQXgCj7odJumJ2hkgJPNHZsmXm+jbXcGDfu0g==
+"@tvkitchen/base-errors@^1.0.0":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@tvkitchen/base-errors/-/base-errors-1.0.1.tgz#1117e17c8a0888989ad155d1318d03b6a6ab942f"
+  integrity sha512-AHb+LYbughr1dggUFiAA7y079ZRrjgLiW2KOJgeHbQXSr1kcaxcAnISUV8e1EYuUODhmN1FD8ka9T0d9+RLzKQ==
 
 "@types/babel__core@^7.1.0":
   version "7.1.6"
@@ -4988,6 +4988,11 @@ triple-beam@^1.2.0, triple-beam@^1.3.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/triple-beam/-/triple-beam-1.3.0.tgz#a595214c7298db8339eeeee083e4d10bd8cb8dd9"
   integrity sha512-XrHUvV5HpdLmIj4uVMxHggLbFSZYIn7HEWsqePZcI50pco+MPqJ50wMGY794X7AOOhxOBAjbkqfAbEe/QMp2Lw==
+
+ts-demuxer@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/ts-demuxer/-/ts-demuxer-1.0.0.tgz#b0b873e7951a5a272e671acb82f622256d9eb891"
+  integrity sha512-76K1Tyb82CbawAUJ6Qz76TykS3SdgEWpJtE3GkUdBvOgdc/mkxns/1dDsViUNpmWZkBDWGBtnJl4EsYULc7Ruw==
 
 tslib@^1.9.0:
   version "1.11.1"

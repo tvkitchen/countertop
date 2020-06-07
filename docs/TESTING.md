@@ -42,6 +42,10 @@ For instance, the following might be a file for an integration test suite of the
 
 Manually created data for unit tests should be stored in a `data` directory within `__test__`.  The same data file should NOT be shared between multiple tests, so as to avoid accidental coupling.
 
+Data should be stored in a JSON file named `methodBeingTested.json`.  If there is more than one data file for a given tested method it should be appropriately named e.g. `methodBeingTested.moreDetailedDescription.json`.
+
+The data loader only supports JSON data.
+
 ### Output data
 
 If the expected output for a given test is expected to be long or complex, we recommend the use of [snapshots](https://jestjs.io/docs/en/snapshot-testing).
