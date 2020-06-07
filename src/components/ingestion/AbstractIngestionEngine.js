@@ -10,9 +10,7 @@ import {
 	AbstractInstantiationError,
 	NotImplementedError,
 } from '@tvkitchen/base-errors'
-import {
-	TSDemuxer,
-} from 'ts-demuxer'
+import { TSDemuxer } from 'ts-demuxer'
 
 import logger from '%src/lib/logger'
 import kafka from '%src/lib/kafka'
@@ -23,21 +21,21 @@ import {
 
 /**
  * The AbstractIngestionEngine handles the bulk of the stream processing associated with video
- * ingestion. Ingeston Engines that implement this class are responsible for defining the input
+ * ingestion. Ingestion Engines that implement this class are responsible for defining the input
  * stream, and the abstract class will handle coordinating the input pipeline that ultimately
- * produces messages to the STREAM.CONTAINER kafka queue.
+ * produces messages to the STREAM.CONTAINER Kafka queue.
  *
- * The pipeline is consists of the following steps:
+ * The pipeline consists of the following steps:
  *
  * 1. The input stream emits video data.
- * 2. That video data is piped to an FFmpeg spawn process in order to wrap it in an MPEG-TS
- *    container.
+ * 2. That video data is piped to an FFmpeg spawn process in order to ensure the container format
+ *    is MPEG-TS.
  * 3. The FFmpeg spawn process emits MPEG-TS data.
  * 4. That MPEG-TS data is processed by `TSDemuxer` in order to decorate it with the display
  *    timestamp (DTS).
- * 5. The decorated data is piped to Kafka as TV Kitchen `Payload`.
+ * 5. The decorated data is piped to Kafka as a TV Kitchen `Payload`.
  *
- * When the stream ends, the FFMPEG process and pipeline is shut down.
+ * When the stream ends, the FFmpeg process and pipeline is shut down.
  */
 class AbstractIngestionEngine {
 	constructor() {
@@ -49,8 +47,8 @@ class AbstractIngestionEngine {
 	// The FFmpeg process used to wrap the ingestion stream in an MPEG-TS container
 	ffmpegProcess = null
 
-	// The ingestion pipeline managed by this engine, started by `start()` and stopped by `stop()`
-	activeIngestionPipeline = null
+	// The ingestion stream consumed by this engine, started by `start()` and stopped by `stop()`
+	activeInputStream = null
 
 	// Utility for processing the MPEG-TS stream produced by ffmpeg
 	mpegtsDemuxer = new TSDemuxer(this.onDemuxedPacket)
@@ -74,7 +72,7 @@ class AbstractIngestionEngine {
 	})
 
 	/**
-	 * Ingests an TV Kitchen payload into the Kafka pipeline.
+	 * Ingests a TV Kitchen payload into the Kafka pipeline.
 	 *
 	 * This is invoked by Writeable streams, and so the method API is dictated by that specification.
 	 *
@@ -101,7 +99,7 @@ class AbstractIngestionEngine {
 	 * This method is called by our MPEG-TS demuxer, and allows the ingestion engine to track
 	 * the most recent demuxed packet.
 	 *
-	 * @param  {Packet} packet The latest TSDemuxer Packet object.
+	 * @param  {Packet} packet The latest TSDemuxer Packet object
 	 */
 	onDemuxedPacket = (packet) => {
 		this.mostRecentDemuxedPacket = packet
@@ -112,7 +110,7 @@ class AbstractIngestionEngine {
 	 * This packet is lower level than the MPEG-TS container, and represents an audio or video
 	 * packet demuxed from the MPEG-TS stream.
 	 *
-	 * @return {Packet} The most recent Packet object extracted by TSDemuxer.
+	 * @return {Packet} The most recent Packet object extracted by TSDemuxer
 	 */
 	getMostRecentDemuxedPacket = () => this.mostRecentDemuxedPacket
 
@@ -121,11 +119,11 @@ class AbstractIngestionEngine {
 	 * function should be presented sequentially, and combine to form a coherent MPEG-TS
 	 * data stream, but they can be of arbitrary size.
 	 *
-	 * This method is called by a NodeJS Transform stream and so matches that spec
+	 * This method is called by a NodeJS Transform stream and so matches that spec.
 	 *
-	 * @param  {Buffer} mpegtsData The latest sequential chunk of MPEG-TS data.
-	 * @param  {String} enc        The encoding of the passed data.
-	 * @param  {Function(err,result)} done     A `(err, result) => ...` callback.
+	 * @param  {Buffer} mpegtsData The latest sequential chunk of MPEG-TS data
+	 * @param  {String} enc        The encoding of the passed data
+	 * @param  {Function(err,result)} done     A `(err, result) => ...` callback
 	 *
 	 */
 	processMpegtsStreamData = (mpegtsData, enc, done) => {
@@ -136,7 +134,7 @@ class AbstractIngestionEngine {
 			type: dataTypes.STREAM.CONTAINER,
 			duration: 0,
 			position: tsToMilliseconds(demuxedPacket.pts),
-			createdAt: Date.now(),
+			createdAt: (new Date()).toISOString(),
 		})
 		done(null, payload)
 	}
@@ -155,17 +153,16 @@ class AbstractIngestionEngine {
 	 */
 	start = () => {
 		this.ffmpegProcess = spawn('ffmpeg', this.getFfmpegSettings())
-		const inputStream = this.getInputStream()
+		this.activeInputStream = this.getInputStream()
 
 		logger.info(`Starting ingestion from ${this.constructor.name}...`)
-		inputStream.pipe(this.ffmpegProcess.stdin)
-		this.activeIngestionPipeline = pipeline(
+		this.activeInputStream.pipe(this.ffmpegProcess.stdin)
+		return pipeline(
 			this.ffmpegProcess.stdout,
 			this.mpegtsProcessingStream,
 			this.payloadIngestionStream,
 			() => this.stop(),
 		)
-		return this.activeIngestionPipeline
 	}
 
 	/**
@@ -174,8 +171,8 @@ class AbstractIngestionEngine {
 	 * This stops the ingestion stream if it exists and terminates the FFmpeg process if it exists
 	 */
 	stop = () => {
-		if (this.activeIngestionPipeline !== null) {
-			this.activeIngestionPipeline.end()
+		if (this.activeInputStream !== null) {
+			this.activeInputStream.end()
 		}
 		if (this.ffmpegProcess !== null) {
 			this.ffmpegProcess.kill()
@@ -186,11 +183,12 @@ class AbstractIngestionEngine {
 	/**
 	 * Returns an FFmpeg settings array for this ingestion engine.
 	 *
-	 * @return {String[]} A list of FFmpeg command line parameters.
+	 * @return {String[]} A list of FFmpeg command line parameters
 	 */
 	getFfmpegSettings = () => [
 		'-loglevel', 'info',
 		'-i', '-',
+		'-codec', 'copy',
 		'-f', 'mpegts',
 		'-',
 	]
@@ -200,7 +198,7 @@ class AbstractIngestionEngine {
 	 *
 	 * NOTE: THIS MUST BE IMPLEMENTED
 	 *
-	 * @return {ReadableStream} The stream of data to be ingested by the ingestion engine.
+	 * @return {ReadableStream} The stream of data to be ingested by the ingestion engine
 	 */
 	getInputStream = () => {
 		throw new NotImplementedError('getInputStream')

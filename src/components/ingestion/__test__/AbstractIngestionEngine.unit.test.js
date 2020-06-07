@@ -144,6 +144,7 @@ describe('AbstractIngestionEngine', () => {
 			const streamData = Buffer.from('testDataXYZ', 'utf8')
 			ingestionEngine.processMpegtsStreamData(streamData, null, (err, result) => {
 				expect(result.position).toEqual(1000)
+				expect(typeof result.createdAt).toBe('string')
 			})
 		})
 	})
@@ -205,14 +206,14 @@ describe('AbstractIngestionEngine', () => {
 		it('should kill the ffmpeg process and stop the stream', () => {
 			jest.clearAllMocks()
 			const ingestionEngine = new FullyImplementedIngestionEngine()
-			ingestionEngine.activeIngestionPipeline = {
+			ingestionEngine.activeInputStream = {
 				end: jest.fn(),
 			}
 			ingestionEngine.ffmpegProcess = {
 				kill: jest.fn(),
 			}
 			ingestionEngine.stop()
-			expect(ingestionEngine.activeIngestionPipeline.end).toHaveBeenCalledTimes(1)
+			expect(ingestionEngine.activeInputStream.end).toHaveBeenCalledTimes(1)
 			expect(ingestionEngine.ffmpegProcess.kill).toHaveBeenCalledTimes(1)
 		})
 		it('should not error if called before starting', () => {
