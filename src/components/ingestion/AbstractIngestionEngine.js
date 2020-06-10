@@ -44,33 +44,6 @@ class AbstractIngestionEngine {
 		}
 	}
 
-	// The FFmpeg process used to wrap the ingestion stream in an MPEG-TS container
-	ffmpegProcess = null
-
-	// The ingestion stream consumed by this engine, started by `start()` and stopped by `stop()`
-	activeInputStream = null
-
-	// Utility for processing the MPEG-TS stream produced by ffmpeg
-	mpegtsDemuxer = new TSDemuxer(this.onDemuxedPacket)
-
-	// A shim variable that allows us to use the output of TSDemuxer in our engine
-	mostRecentDemuxedPacket = null
-
-	// Used to send processed STREAM.CONTAINER payloads to Kafka
-	producer = kafka.producer()
-
-	// A Transformation stream that will convert MPEG-TS data into TV Kitchen Payloads
-	mpegtsProcessingStream = Transform({
-		objectMode: true,
-		write: this.processMpegtsStreamData,
-	})
-
-	// A Writeable stream that will ingest Payloads into the TV Kitchen pipeline.
-	payloadIngestionStream = Writable({
-		objectMode: true,
-		write: this.ingestPayload,
-	})
-
 	/**
 	 * Ingests a TV Kitchen payload into the Kafka pipeline.
 	 *
@@ -140,6 +113,57 @@ class AbstractIngestionEngine {
 	}
 
 	/**
+	 * Returns an FFmpeg settings array for this ingestion engine.
+	 *
+	 * @return {String[]} A list of FFmpeg command line parameters
+	 */
+	getFfmpegSettings = () => [
+		'-loglevel', 'info',
+		'-i', '-',
+		'-codec', 'copy',
+		'-f', 'mpegts',
+		'-',
+	]
+
+	/**
+	 * The ReadableStream that is being ingested by the ingestion engine.
+	 *
+	 * NOTE: THIS MUST BE IMPLEMENTED
+	 *
+	 * @return {ReadableStream} The stream of data to be ingested by the ingestion engine
+	 */
+	getInputStream = () => {
+		throw new NotImplementedError('getInputStream')
+	}
+
+	// The FFmpeg process used to wrap the ingestion stream in an MPEG-TS container
+	ffmpegProcess = null
+
+	// The ingestion stream consumed by this engine, started by `start()` and stopped by `stop()`
+	activeInputStream = null
+
+	// Utility for processing the MPEG-TS stream produced by ffmpeg
+	mpegtsDemuxer = new TSDemuxer(this.onDemuxedPacket)
+
+	// A shim variable that allows us to use the output of TSDemuxer in our engine
+	mostRecentDemuxedPacket = null
+
+	// Used to send processed STREAM.CONTAINER payloads to Kafka
+	producer = kafka.producer()
+
+	// A Transformation stream that will convert MPEG-TS data into TV Kitchen Payloads
+	mpegtsProcessingStream = Transform({
+		objectMode: true,
+		write: this.processMpegtsStreamData,
+	})
+
+	// A Writeable stream that will ingest Payloads into the TV Kitchen pipeline.
+	payloadIngestionStream = Writable({
+		objectMode: true,
+		write: this.ingestPayload,
+	})
+
+	/**
 	 * Start the ingestion engine.
 	 *
 	 * This creates an FFmpeg process configured to convert input into a predetermined
@@ -178,30 +202,6 @@ class AbstractIngestionEngine {
 			this.ffmpegProcess.kill()
 		}
 		logger.info(`Ended ingestion from ${this.constructor.name}...`)
-	}
-
-	/**
-	 * Returns an FFmpeg settings array for this ingestion engine.
-	 *
-	 * @return {String[]} A list of FFmpeg command line parameters
-	 */
-	getFfmpegSettings = () => [
-		'-loglevel', 'info',
-		'-i', '-',
-		'-codec', 'copy',
-		'-f', 'mpegts',
-		'-',
-	]
-
-	/**
-	 * The ReadableStream that is being ingested by the ingestion engine.
-	 *
-	 * NOTE: THIS MUST BE IMPLEMENTED
-	 *
-	 * @return {ReadableStream} The stream of data to be ingested by the ingestion engine
-	 */
-	getInputStream = () => {
-		throw new NotImplementedError('getInputStream')
 	}
 }
 
