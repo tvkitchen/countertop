@@ -4,6 +4,17 @@ This project uses Jest for testing.  All new [contributions](docs/CONTRIBUTING.m
 
 **Please review [this excellent guide](https://github.com/goldbergyoni/javascript-testing-best-practices) on JavaScript testing best practices.**
 
+## Test Command
+
+To test the project, run:
+
+```
+yarn test
+```
+
+This will display the test results, but not other logging output from the code by default. To override this add `--no-silent`.
+
+
 ## Test Locations
 
 We have a few types of test, which should be placed in different places depending on the type of test.
