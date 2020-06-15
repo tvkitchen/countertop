@@ -9,3 +9,6 @@
  * @return {Boolean}           Whether the method is defined and is a function
  */
 export const methodExists = (methodName, object) => typeof object[methodName] === 'function'
+
+
+export const loadDynamicPackage = (packageName) => require(packageName).default
