@@ -38,12 +38,6 @@ import {
  * When the stream ends, the FFmpeg process and pipeline is shut down.
  */
 class AbstractIngestionEngine {
-	constructor() {
-		if (this.constructor === AbstractIngestionEngine) {
-			throw new AbstractInstantiationError(this.constructor.name)
-		}
-	}
-
 	// The FFmpeg process used to wrap the ingestion stream in an MPEG-TS container
 	ffmpegProcess = null
 
@@ -51,25 +45,39 @@ class AbstractIngestionEngine {
 	activeInputStream = null
 
 	// Utility for processing the MPEG-TS stream produced by ffmpeg
-	mpegtsDemuxer = new TSDemuxer(this.onDemuxedPacket)
+	mpegtsDemuxer = null
 
 	// A shim variable that allows us to use the output of TSDemuxer in our engine
 	mostRecentDemuxedPacket = null
 
 	// Used to send processed STREAM.CONTAINER payloads to Kafka
-	producer = kafka.producer()
+	producer = null
 
 	// A Transformation stream that will convert MPEG-TS data into TV Kitchen Payloads
-	mpegtsProcessingStream = Transform({
-		objectMode: true,
-		write: this.processMpegtsStreamData,
-	})
+	mpegtsProcessingStream = null
 
 	// A Writeable stream that will ingest Payloads into the TV Kitchen pipeline.
-	payloadIngestionStream = Writable({
-		objectMode: true,
-		write: this.ingestPayload,
-	})
+	payloadIngestionStream = null
+
+	constructor() {
+		if (this.constructor === AbstractIngestionEngine) {
+			throw new AbstractInstantiationError(this.constructor.name)
+		}
+
+		this.mpegtsDemuxer = new TSDemuxer(this.onDemuxedPacket)
+
+		this.producer = kafka.producer()
+
+		this.mpegtsProcessingStream = Transform({
+			objectMode: true,
+			transform: this.processMpegtsStreamData,
+		})
+
+		this.payloadIngestionStream = Writable({
+			objectMode: true,
+			write: this.ingestPayload,
+		})
+	}
 
 	/**
 	 * Ingests a TV Kitchen payload into the Kafka pipeline.
@@ -84,12 +92,15 @@ class AbstractIngestionEngine {
 		if (!(payload instanceof Payload)) {
 			done(new Error('ingestPayloadStream received non-Payload data'))
 		} else {
-			done(this.producer.send({
-				topic: dataTypes.STREAM.CONTAINER,
-				messages: [{
-					value: Payload.serialize(payload),
-				}],
-			}))
+			this.producer
+				.send({
+					topic: dataTypes.STREAM.CONTAINER,
+					messages: [{
+						value: Payload.serialize(payload),
+					}],
+				})
+				.then((result) => done(null, result))
+				.catch(done)
 		}
 	}
 
@@ -151,8 +162,9 @@ class AbstractIngestionEngine {
 	 *
 	 * @return {Stream} the ingestion pipeline that just got started
 	 */
-	start = () => {
+	start = async () => {
 		this.ffmpegProcess = spawn('ffmpeg', this.getFfmpegSettings())
+		await this.producer.connect()
 		this.activeInputStream = this.getInputStream()
 
 		logger.info(`Starting ingestion from ${this.constructor.name}...`)
@@ -172,11 +184,12 @@ class AbstractIngestionEngine {
 	 */
 	stop = () => {
 		if (this.activeInputStream !== null) {
-			this.activeInputStream.end()
+			this.activeInputStream.destroy()
 		}
 		if (this.ffmpegProcess !== null) {
 			this.ffmpegProcess.kill()
 		}
+		this.producer.disconnect()
 		logger.info(`Ended ingestion from ${this.constructor.name}...`)
 	}
 

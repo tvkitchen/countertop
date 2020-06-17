@@ -61,7 +61,7 @@ describe('AbstractIngestionEngine', () => {
 		it('should send data to the kafka producer', async () => {
 			jest.clearAllMocks()
 			const ingestionEngine = new FullyImplementedIngestionEngine()
-			ingestionEngine.producer = { send: jest.fn() }
+			ingestionEngine.producer = { send: jest.fn().mockResolvedValue() }
 			const buffer = fs.readFileSync(path.join(__dirname, '/data/thinkingface.png'))
 			const payload = new Payload({ data: buffer })
 			ingestionEngine.ingestPayload(payload, null, () => {
@@ -72,7 +72,7 @@ describe('AbstractIngestionEngine', () => {
 		it('should send payloads to the correct topic', async () => {
 			jest.clearAllMocks()
 			const ingestionEngine = new FullyImplementedIngestionEngine()
-			ingestionEngine.producer = { send: jest.fn() }
+			ingestionEngine.producer = { send: jest.fn().mockResolvedValue() }
 			const buffer = fs.readFileSync(path.join(__dirname, '/data/thinkingface.png'))
 			const payload = new Payload({ data: buffer })
 			ingestionEngine.ingestPayload(payload, null, () => {
@@ -85,7 +85,7 @@ describe('AbstractIngestionEngine', () => {
 		it('should send a deserializable Payload', async () => {
 			jest.clearAllMocks()
 			const ingestionEngine = new FullyImplementedIngestionEngine()
-			ingestionEngine.producer = { send: jest.fn() }
+			ingestionEngine.producer = { send: jest.fn().mockResolvedValue() }
 			const buffer = fs.readFileSync(path.join(__dirname, '/data/thinkingface.png'))
 			const payload = new Payload({ data: buffer })
 			ingestionEngine.ingestPayload(payload, null, () => {
@@ -184,10 +184,11 @@ describe('AbstractIngestionEngine', () => {
 			})
 			const inputStream = new Readable({ read: () => {} })
 			const ingestionEngine = new FullyImplementedIngestionEngine(inputStream)
+			ingestionEngine.producer = { connect: jest.fn().mockResolvedValue() }
 			ingestionEngine.start()
 			expect(childProcess.spawn).toHaveBeenCalledTimes(1)
 		})
-		it('should create a processing pipeline', () => {
+		it('should create a processing pipeline', async () => {
 			jest.clearAllMocks()
 			childProcess.spawn.mockReturnValueOnce({
 				stdout: new Readable(),
@@ -196,8 +197,8 @@ describe('AbstractIngestionEngine', () => {
 			childProcess.spawn.mockReturnValueOnce({})
 			const inputStream = new Readable({ read: jest.fn() })
 			const ingestionEngine = new FullyImplementedIngestionEngine(inputStream)
-			ingestionEngine.ingestPayloadStream = jest.fn()
-			ingestionEngine.start()
+			ingestionEngine.producer = { connect: jest.fn().mockResolvedValue() }
+			await ingestionEngine.start()
 			expect(stream.pipeline).toHaveBeenCalledTimes(1)
 		})
 	})
@@ -207,18 +208,24 @@ describe('AbstractIngestionEngine', () => {
 			jest.clearAllMocks()
 			const ingestionEngine = new FullyImplementedIngestionEngine()
 			ingestionEngine.activeInputStream = {
-				end: jest.fn(),
+				destroy: jest.fn(),
 			}
 			ingestionEngine.ffmpegProcess = {
 				kill: jest.fn(),
 			}
+			ingestionEngine.producer = {
+				disconnect: jest.fn(),
+			}
 			ingestionEngine.stop()
-			expect(ingestionEngine.activeInputStream.end).toHaveBeenCalledTimes(1)
+			expect(ingestionEngine.activeInputStream.destroy).toHaveBeenCalledTimes(1)
 			expect(ingestionEngine.ffmpegProcess.kill).toHaveBeenCalledTimes(1)
 		})
 		it('should not error if called before starting', () => {
 			jest.clearAllMocks()
 			const ingestionEngine = new FullyImplementedIngestionEngine()
+			ingestionEngine.producer = {
+				disconnect: jest.fn(),
+			}
 			expect(() => ingestionEngine.stop()).not.toThrow()
 		})
 	})
