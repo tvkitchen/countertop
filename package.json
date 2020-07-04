@@ -42,7 +42,8 @@
     "@tvkitchen/base-constants": "^1.0.0",
     "@tvkitchen/base-classes": "^1.1.0",
     "@tvkitchen/base-errors": "^1.0.0",
-    "@jest/console": "^25.1.0"
+    "@jest/console": "^25.1.0",
+    "ytdl-core": "^2.1.7"
   },
   "devDependencies": {
     "@babel/core": "^7.8.7",
