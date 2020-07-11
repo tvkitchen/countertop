@@ -36,7 +36,7 @@ The root structure is as follows:
 - src      // The primary code location itself
 | - components // Architectural components
 | - constants  // Constants used throughout the project
-| - lib        // Supporting code (e.g. utilities, DB singletons, etc)
+| - tools      // Supporting code (e.g. utilities, DB singletons, etc)
 | - scripts    // Supporting scripts
 | - tests      // System-wide / integration tests
 ```
