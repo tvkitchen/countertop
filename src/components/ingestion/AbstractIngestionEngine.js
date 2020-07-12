@@ -12,12 +12,12 @@ import {
 } from '@tvkitchen/base-errors'
 import { TSDemuxer } from 'ts-demuxer'
 
-import logger from '%src/lib/logger'
-import kafka from '%src/lib/kafka'
+import logger from '%src/tools/logger'
+import kafka from '%src/tools/kafka'
 import {
 	tsToMilliseconds,
 	generateEmptyPacket,
-} from '%src/lib/utils/mpegts'
+} from '%src/tools/utils/mpegts'
 
 /**
  * The AbstractIngestionEngine handles the bulk of the stream processing associated with video

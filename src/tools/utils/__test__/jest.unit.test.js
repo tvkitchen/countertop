@@ -1,6 +1,6 @@
 import {
 	loadTestData,
-} from '%src/lib/utils/jest'
+} from '%src/tools/utils/jest'
 
 describe('jest', () => {
 	describe('loadTestData', () => {

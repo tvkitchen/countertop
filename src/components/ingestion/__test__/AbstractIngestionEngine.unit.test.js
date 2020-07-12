@@ -1,7 +1,7 @@
 // Mocked imports
 import childProcess from 'child_process'
 import stream from 'stream'
-import kafka from '%src/lib/kafka' // eslint-disable-line import/order
+import kafka from '%src/tools/kafka' // eslint-disable-line import/order
 
 // Test imports
 import fs from 'fs'
@@ -12,7 +12,7 @@ import {
 } from '@tvkitchen/base-errors'
 import { dataTypes } from '@tvkitchen/base-constants'
 import { Payload } from '@tvkitchen/base-classes'
-import { loadTestData } from '%src/lib/utils/jest'
+import { loadTestData } from '%src/tools/utils/jest'
 import AbstractIngestionEngine from '../AbstractIngestionEngine'
 import FullyImplementedIngestionEngine from './classes/FullyImplementedIngestionEngine'
 import PartiallyImplementedIngestionEngine from './classes/PartiallyImplementedIngestionEngine'
@@ -20,7 +20,7 @@ import PartiallyImplementedIngestionEngine from './classes/PartiallyImplementedI
 // Set up mocks
 jest.mock('child_process')
 jest.mock('stream')
-jest.mock('%src/lib/kafka')
+jest.mock('%src/tools/kafka')
 
 // This pulls actual versions of mocked components, since we use them
 const {

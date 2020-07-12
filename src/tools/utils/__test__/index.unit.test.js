@@ -1,6 +1,6 @@
 import {
 	methodExists,
-} from '%src/lib/utils'
+} from '%src/tools/utils'
 
 describe('index', () => {
 	describe('methodExists', () => {
