@@ -1,0 +1,87 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`jest normalizeStream should replace stations with the correct index in a stream 1`] = `
+Object {
+  "mouth": 1,
+  "source": 0,
+  "tributaryMap": Map {
+    "foo" => Object {
+      "mouth": 0,
+      "source": 0,
+      "tributaryMap": Map {},
+    },
+  },
+}
+`;
+
+exports[`jest normalizeStreams should replace stations with the correct index in an array of streams 1`] = `
+Array [
+  Object {
+    "mouth": 0,
+    "source": 0,
+    "tributaryMap": Map {},
+  },
+  Object {
+    "mouth": 1,
+    "source": 0,
+    "tributaryMap": Map {
+      "foo" => Object {
+        "mouth": 0,
+        "source": 0,
+        "tributaryMap": Map {},
+      },
+    },
+  },
+]
+`;
+
+exports[`jest normalizeTributaryMap should replace stations with the correct index in a single tributary map 1`] = `
+Map {
+  "foo" => Object {
+    "mouth": 0,
+    "source": 0,
+    "tributaryMap": Map {},
+  },
+  "bar" => Object {
+    "mouth": 1,
+    "source": 0,
+    "tributaryMap": Map {
+      "foo" => Object {
+        "mouth": 0,
+        "source": 0,
+        "tributaryMap": Map {},
+      },
+    },
+  },
+}
+`;
+
+exports[`jest normalizeTributaryMaps should replace stations with correct index in an array of tributary maps 1`] = `
+Array [
+  Map {
+    "foo" => Object {
+      "mouth": 0,
+      "source": 0,
+      "tributaryMap": Map {},
+    },
+    "bar" => Object {
+      "mouth": 1,
+      "source": 0,
+      "tributaryMap": Map {
+        "foo" => Object {
+          "mouth": 0,
+          "source": 0,
+          "tributaryMap": Map {},
+        },
+      },
+    },
+  },
+  Map {
+    "foo" => Object {
+      "mouth": 2,
+      "source": 2,
+      "tributaryMap": Map {},
+    },
+  },
+]
+`;

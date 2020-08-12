@@ -1,0 +1,241 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CountertopCoordinator updateTopology Should generate correct simple linear topologies 1`] = `
+Array [
+  Object {
+    "mouth": 0,
+    "source": 0,
+    "tributaryMap": Map {},
+  },
+  Object {
+    "mouth": 1,
+    "source": 0,
+    "tributaryMap": Map {
+      "STREAM.CONTAINER" => Object {
+        "mouth": 0,
+        "source": 0,
+        "tributaryMap": Map {},
+      },
+    },
+  },
+]
+`;
+
+exports[`CountertopCoordinator updateTopology Should generate correct topologies with dual inputs 1`] = `
+Array [
+  Object {
+    "mouth": 0,
+    "source": 0,
+    "tributaryMap": Map {},
+  },
+  Object {
+    "mouth": 1,
+    "source": 0,
+    "tributaryMap": Map {
+      "STREAM.CONTAINER" => Object {
+        "mouth": 0,
+        "source": 0,
+        "tributaryMap": Map {},
+      },
+    },
+  },
+  Object {
+    "mouth": 2,
+    "source": 0,
+    "tributaryMap": Map {
+      "STREAM.CONTAINER" => Object {
+        "mouth": 0,
+        "source": 0,
+        "tributaryMap": Map {},
+      },
+    },
+  },
+  Object {
+    "mouth": 3,
+    "source": 0,
+    "tributaryMap": Map {
+      "TEXT.ATOM" => Object {
+        "mouth": 1,
+        "source": 0,
+        "tributaryMap": Map {
+          "STREAM.CONTAINER" => Object {
+            "mouth": 0,
+            "source": 0,
+            "tributaryMap": Map {},
+          },
+        },
+      },
+      "IMAGE.JPEG" => Object {
+        "mouth": 2,
+        "source": 0,
+        "tributaryMap": Map {
+          "STREAM.CONTAINER" => Object {
+            "mouth": 0,
+            "source": 0,
+            "tributaryMap": Map {},
+          },
+        },
+      },
+    },
+  },
+]
+`;
+
+exports[`CountertopCoordinator updateTopology Should generate correct topologies with dual output appliances 1`] = `
+Array [
+  Object {
+    "mouth": 0,
+    "source": 0,
+    "tributaryMap": Map {},
+  },
+  Object {
+    "mouth": 1,
+    "source": 0,
+    "tributaryMap": Map {
+      "STREAM.CONTAINER" => Object {
+        "mouth": 0,
+        "source": 0,
+        "tributaryMap": Map {},
+      },
+    },
+  },
+]
+`;
+
+exports[`CountertopCoordinator updateTopology Should generate correct topologies with dual outputs 1`] = `
+Array [
+  Object {
+    "mouth": 0,
+    "source": 0,
+    "tributaryMap": Map {},
+  },
+  Object {
+    "mouth": 1,
+    "source": 0,
+    "tributaryMap": Map {
+      "STREAM.CONTAINER" => Object {
+        "mouth": 0,
+        "source": 0,
+        "tributaryMap": Map {},
+      },
+    },
+  },
+  Object {
+    "mouth": 2,
+    "source": 0,
+    "tributaryMap": Map {
+      "IMAGE.JPEG" => Object {
+        "mouth": 1,
+        "source": 0,
+        "tributaryMap": Map {
+          "STREAM.CONTAINER" => Object {
+            "mouth": 0,
+            "source": 0,
+            "tributaryMap": Map {},
+          },
+        },
+      },
+    },
+  },
+  Object {
+    "mouth": 3,
+    "source": 0,
+    "tributaryMap": Map {
+      "TEXT.ATOM" => Object {
+        "mouth": 1,
+        "source": 0,
+        "tributaryMap": Map {
+          "STREAM.CONTAINER" => Object {
+            "mouth": 0,
+            "source": 0,
+            "tributaryMap": Map {},
+          },
+        },
+      },
+    },
+  },
+  Object {
+    "mouth": 3,
+    "source": 0,
+    "tributaryMap": Map {
+      "TEXT.ATOM" => Object {
+        "mouth": 2,
+        "source": 0,
+        "tributaryMap": Map {
+          "IMAGE.JPEG" => Object {
+            "mouth": 1,
+            "source": 0,
+            "tributaryMap": Map {
+              "STREAM.CONTAINER" => Object {
+                "mouth": 0,
+                "source": 0,
+                "tributaryMap": Map {},
+              },
+            },
+          },
+        },
+      },
+    },
+  },
+  Object {
+    "mouth": 3,
+    "source": 0,
+    "tributaryMap": Map {
+      "TEXT.ATOM" => Object {
+        "mouth": 2,
+        "source": 0,
+        "tributaryMap": Map {
+          "IMAGE.JPEG" => Object {
+            "mouth": 1,
+            "source": 0,
+            "tributaryMap": Map {
+              "STREAM.CONTAINER" => Object {
+                "mouth": 0,
+                "source": 0,
+                "tributaryMap": Map {},
+              },
+            },
+          },
+        },
+      },
+    },
+  },
+]
+`;
+
+exports[`CountertopCoordinator updateTopology Should generate correct topologies with multiple sources 1`] = `
+Array [
+  Object {
+    "mouth": 0,
+    "source": 0,
+    "tributaryMap": Map {},
+  },
+  Object {
+    "mouth": 1,
+    "source": 1,
+    "tributaryMap": Map {},
+  },
+  Object {
+    "mouth": 2,
+    "source": 0,
+    "tributaryMap": Map {
+      "STREAM.CONTAINER" => Object {
+        "mouth": 0,
+        "source": 0,
+        "tributaryMap": Map {},
+      },
+    },
+  },
+  Object {
+    "mouth": 2,
+    "source": 1,
+    "tributaryMap": Map {
+      "STREAM.CONTAINER" => Object {
+        "mouth": 1,
+        "source": 1,
+        "tributaryMap": Map {},
+      },
+    },
+  },
+]
+`;
