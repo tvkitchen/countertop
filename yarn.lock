@@ -1122,10 +1122,23 @@
   resolved "https://registry.yarnpkg.com/@tvkitchen/base-constants/-/base-constants-1.0.1.tgz#f5f89ba22c55fb8ec57ee685cb5473ecf7893a31"
   integrity sha512-i77NYp6qLX0DTy4cpm2uj3F9SA+g+Qt7I7dTsILJyWgKUIHjuF3Fl/3J+vWHY7RJ+W4Y2SQ28/E+2CV2quBg6A==
 
+"@tvkitchen/base-constants@^1.1.1":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@tvkitchen/base-constants/-/base-constants-1.2.0.tgz#020246bd1ff700e67066eea2e708dc5254cbcb9d"
+  integrity sha512-9oyAYcMwWH1NiM9kFJ6yxameRBb58gq3/NCPBcXxVRe8IdHnQ3XKVC0fw0J3pfeOgOHayEeVTtEcSx4FlhilOw==
+
 "@tvkitchen/base-errors@^1.0.0":
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/@tvkitchen/base-errors/-/base-errors-1.0.1.tgz#1117e17c8a0888989ad155d1318d03b6a6ab942f"
   integrity sha512-AHb+LYbughr1dggUFiAA7y079ZRrjgLiW2KOJgeHbQXSr1kcaxcAnISUV8e1EYuUODhmN1FD8ka9T0d9+RLzKQ==
+
+"@tvkitchen/base-interfaces@4.0.0-alpha.1":
+  version "4.0.0-alpha.1"
+  resolved "https://registry.yarnpkg.com/@tvkitchen/base-interfaces/-/base-interfaces-4.0.0-alpha.1.tgz#dca15fc07be492a3b726bd9c04e936dad8438e2b"
+  integrity sha512-i0kBOgVn3ASDrFoe++lfiYfxIiSOc5/jhWI+VlXJaxd5MBVtjNI0wltly/2VX8c4hlZ+TKDSpm3c7SmHQ5HoPQ==
+  dependencies:
+    "@tvkitchen/base-constants" "^1.1.1"
+    "@tvkitchen/base-errors" "^1.0.0"
 
 "@types/babel__core@^7.1.0":
   version "7.1.6"
@@ -5122,6 +5135,11 @@ uuid@^3.3.2:
   version "3.4.0"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.4.0.tgz#b23e4358afa8a202fe7a100af1f5f883f02007ee"
   integrity sha512-HjSDRw6gZE5JMggctHBcjVak08+KEVhSIiDzFnT9S9aegmp85S/bReBVTb4QTFaRNptJ9kuYaNhnbNEOkbKb/A==
+
+uuid@^8.3.0:
+  version "8.3.0"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-8.3.0.tgz#ab738085ca22dc9a8c92725e459b1d507df5d6ea"
+  integrity sha512-fX6Z5o4m6XsXBdli9g7DtWgAx+osMsRRZFKma1mIUsLCz6vRvv+pz5VNbyu9UEDzpMWulZfvpgb/cmDXVulYFQ==
 
 v8-compile-cache@^2.0.3:
   version "2.1.0"
