@@ -1,13 +1,14 @@
-import CountertopStation from '%src/components/countertop/CountertopStation'
-import CountertopTopology from '%src/components/countertop/CountertopTopology'
+import CountertopStation from '%src/classes/CountertopStation'
+import CountertopTopology from '%src/classes/CountertopTopology'
 
 /**
- * The Countertop Coordinator (aka the Sous Chef) sets up and monitors all aspects of the
- * countertop to ensure the proper flow and processing of data.
+ * The Countertop sets up and monitors stations for registered appliances to ensure the proper
+ * flow and processing of data.
  *
- * It is also the integration point between the Countertop and other system components.
+ * It is also responsible for emitting information and serving as the entry and exit point of
+ * the countertop architecture.
  */
-class CountertopCoordinator {
+class Countertop {
 	stations = []
 
 	/**
@@ -33,4 +34,4 @@ class CountertopCoordinator {
 	}
 }
 
-export default CountertopCoordinator
+export default Countertop
