@@ -4,6 +4,7 @@
   "description": "The entry point for developers who want to set up a TV Kitchen.",
   "main": "index.js",
   "scripts": {
+    "build": "yarn run babel src -d lib",
     "kafka": "yarn kafka:start",
     "kafka:start": "./services/kafka/start.sh",
     "kafka:stop": "./services/kafka/stop.sh",
@@ -46,6 +47,7 @@
     "winston": "^3.2.1"
   },
   "devDependencies": {
+    "@babel/cli": "^7.10.5",
     "@babel/core": "^7.8.7",
     "@babel/node": "^7.8.7",
     "@babel/plugin-proposal-class-properties": "^7.8.3",
