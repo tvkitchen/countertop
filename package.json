@@ -7,7 +7,7 @@
     "kafka": "yarn kafka:start",
     "kafka:start": "./services/kafka/start.sh",
     "kafka:stop": "./services/kafka/stop.sh",
-    "lint": "./node_modules/.bin/eslint 'src/**/*.js' 'lib/**/*.js'",
+    "lint": "./node_modules/.bin/eslint 'src/**/*.js'",
     "sandbox": "babel-node -- src/scripts/_sandbox",
     "start": "yarn babel-node src/index.js",
     "test": "jest"
@@ -40,7 +40,6 @@
     "dotenv": "^8.2.0",
     "jest": "^25.1.0",
     "kafkajs": "^1.12.0",
-    "module-alias": "^2.2.2",
     "nock": "^12.0.2",
     "node-fetch": "^2.6.0",
     "uuid": "^8.3.0",
@@ -60,8 +59,5 @@
   },
   "engines": {
     "node": ">=13.10"
-  },
-  "_moduleAliases": {
-    "%src": "./src"
   }
 }

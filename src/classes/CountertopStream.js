@@ -3,7 +3,7 @@ import { v4 as uuid } from 'uuid'
 import {
 	getLongestStreamLength,
 	getSourcesFromStreamMap,
-} from '%src/tools/utils/countertop'
+} from '../tools/utils/countertop'
 
 class CountertopStream {
 	id = null

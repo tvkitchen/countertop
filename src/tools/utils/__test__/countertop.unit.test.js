@@ -1,12 +1,12 @@
-import { by } from '%src/tools/utils'
+import { by } from '..'
 import {
 	CountertopStation,
 	CountertopStream,
-} from '%src/classes'
+} from '../../../classes'
 import {
 	generateMockAppliance,
 	normalizeTributaryMaps,
-} from '%src/tools/utils/jest'
+} from '../jest'
 import {
 	getSourceStations,
 	getLongestStreamLength,

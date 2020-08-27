@@ -2,7 +2,7 @@ import { IAppliance } from '@tvkitchen/base-interfaces'
 import {
 	CountertopStation,
 	CountertopStream,
-} from '%src/classes'
+} from '../../../classes'
 import {
 	loadTestData,
 	generateMockAppliance,
@@ -10,7 +10,7 @@ import {
 	normalizeTributaryMaps,
 	normalizeStream,
 	normalizeStreams,
-} from '%src/tools/utils/jest'
+} from '../jest'
 
 describe('jest', () => {
 	describe('loadTestData', () => {

@@ -1,4 +1,4 @@
-import CountertopStream from '%src/classes/CountertopStream'
+import CountertopStream from './CountertopStream'
 import {
 	getCollectiveOutputTypes,
 	getStationsThatConsumeTypes,
@@ -7,7 +7,7 @@ import {
 	generateTributaryMaps,
 	getStreamOutputMap,
 	getSourceStations,
-} from '%src/tools/utils/countertop'
+} from '../tools/utils/countertop'
 
 /**
  * CountertopToplogies are a complete set of valid *paths* that data might take across a given
