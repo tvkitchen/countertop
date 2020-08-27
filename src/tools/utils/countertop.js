@@ -1,4 +1,4 @@
-import { arraysHaveOverlap } from '%src/tools/utils'
+import { arraysHaveOverlap } from '.'
 
 /**
  * Returns a list of stations that are considered sources.

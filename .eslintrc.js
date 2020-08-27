@@ -1,6 +1,4 @@
-const { getModuleAliasesForESLint } = require('./lib/utils/moduleAlias')
-
-const settings = {
+module.exports = {
 	"extends": "airbnb-base",
 	"parser": "babel-eslint",
 	"rules": {
@@ -12,12 +10,5 @@ const settings = {
 		"es6": true,
 		"node": true,
 		"jest": true
-	},
-	"settings": {
-		"import/resolver": {
-			"alias": getModuleAliasesForESLint()
-		}
 	}
 }
-
-module.exports = settings

@@ -1,5 +1,5 @@
 import { Kafka } from 'kafkajs'
-import config from '%src/config'
+import config from '../../config'
 
 const kafka = new Kafka({
 	clientId: 'tv-kitchen',

@@ -4,7 +4,7 @@ import {
 	transports,
 } from 'winston'
 
-import config from '%src/config'
+import config from '../../config'
 
 const logger = createLogger({
 	level: config.LOG_LEVEL || 'info',

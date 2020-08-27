@@ -2,7 +2,7 @@ import {
 	methodExists,
 	arraysHaveOverlap,
 	by,
-} from '%src/tools/utils'
+} from '..'
 
 describe('index', () => {
 	describe('methodExists', () => {

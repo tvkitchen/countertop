@@ -4,8 +4,3 @@
 //
 // Do not commit changes to this file! In fact, you should locally set the `--assume-unchanged`
 // flag on it: `git update-index --assume-unchanged ./src/scripts/_sandbox.js`
-import 'module-alias/register'
-
-/**
- * DO NOT MODIFY ABOVE THIS BLOCK
- */

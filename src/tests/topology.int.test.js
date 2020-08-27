@@ -1,9 +1,9 @@
 import { dataTypes } from '@tvkitchen/base-constants'
-import { Countertop } from '%src'
+import { Countertop } from '..'
 import {
 	generateMockAppliance,
 	normalizeStreams,
-} from '%src/tools/utils/jest'
+} from '../tools/utils/jest'
 
 describe('Countertop #integration', () => {
 	describe('updateTopology', () => {
