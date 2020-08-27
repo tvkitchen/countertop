@@ -1,4 +1,4 @@
-import CountertopStream from '%src/components/countertop/CountertopStream'
+import CountertopStream from '%src/classes/CountertopStream'
 import {
 	getCollectiveOutputTypes,
 	getStationsThatConsumeTypes,

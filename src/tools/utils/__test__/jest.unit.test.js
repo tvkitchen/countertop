@@ -2,7 +2,7 @@ import { IAppliance } from '@tvkitchen/base-interfaces'
 import {
 	CountertopStation,
 	CountertopStream,
-} from '%src/components/countertop'
+} from '%src/classes'
 import {
 	loadTestData,
 	generateMockAppliance,

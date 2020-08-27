@@ -1,14 +1,14 @@
 import { dataTypes } from '@tvkitchen/base-constants'
-import CountertopCoordinator from '%src/components/countertop/CountertopCoordinator'
+import { Countertop } from '%src'
 import {
 	generateMockAppliance,
 	normalizeStreams,
 } from '%src/tools/utils/jest'
 
-describe('CountertopCoordinator', () => {
+describe('Countertop #integration', () => {
 	describe('updateTopology', () => {
 		it('Should generate correct simple linear topologies', () => {
-			const countertop = new CountertopCoordinator()
+			const countertop = new Countertop()
 			const sourceAppliance = countertop.addAppliance(generateMockAppliance({
 				inputTypes: [],
 				outputTypes: [dataTypes.STREAM.CONTAINER],
@@ -26,7 +26,7 @@ describe('CountertopCoordinator', () => {
 		})
 
 		it('Should generate correct topologies with multiple sources', () => {
-			const countertop = new CountertopCoordinator()
+			const countertop = new Countertop()
 			const sourceApplianceA = countertop.addAppliance(generateMockAppliance({
 				inputTypes: [],
 				outputTypes: [dataTypes.STREAM.CONTAINER],
@@ -49,7 +49,7 @@ describe('CountertopCoordinator', () => {
 		})
 
 		it('Should generate correct topologies with dual inputs', () => {
-			const countertop = new CountertopCoordinator()
+			const countertop = new Countertop()
 			const sourceAppliance = countertop.addAppliance(generateMockAppliance({
 				inputTypes: [],
 				outputTypes: [dataTypes.STREAM.CONTAINER],
@@ -77,7 +77,7 @@ describe('CountertopCoordinator', () => {
 		})
 
 		it('Should generate correct topologies with dual output appliances', () => {
-			const countertop = new CountertopCoordinator()
+			const countertop = new Countertop()
 			const sourceAppliance = countertop.addAppliance(generateMockAppliance({
 				inputTypes: [],
 				outputTypes: [dataTypes.STREAM.CONTAINER],
@@ -95,7 +95,7 @@ describe('CountertopCoordinator', () => {
 		})
 
 		it('Should generate correct topologies with dual outputs', () => {
-			const countertop = new CountertopCoordinator()
+			const countertop = new Countertop()
 			const sourceAppliance = countertop.addAppliance(generateMockAppliance({
 				inputTypes: [],
 				outputTypes: [dataTypes.STREAM.CONTAINER],

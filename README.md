@@ -1,28 +1,30 @@
-[![Build Status](https://travis-ci.org/tvkitchen/tv-kitchen.svg?branch=master)](https://travis-ci.org/tvkitchen/tv-kitchen)
+[![Build Status](https://travis-ci.org/tvkitchen/tv-kitchen.svg?branch=master)](https://travis-ci.org/tvkitchen/countertop)
 
-# TV Kitchen
+# TV Kitchen Countertop
 
 The [TV Kitchen](https://tv.kitchen) is a playground that turns TV into data (transcripts, facial recognition, etc.) so that newsrooms can help their staff and readers better understand what is happening across various local and cable TV news outlets.
 
+The Countertop is the entry point for developers who want to set up a TV Kitchen.
+
 ## Setting up the project
 
-If you are interested in running the TV Kitchen as a developer please review our [install instructions](docs/INSTALL.md).
+If you are interested in running a copy of the TV Kitchen please review our [install instructions](docs/INSTALL.md).
 
-If you are interested in running the TV Kitchen as a user please visit [our website](https://tv.kitchen).
+If you are interested in working with TV Kitchen data please visit [our website](https://tv.kitchen).
 
 ## Starting the project
 
-1. If you are not already running your own instance of Kafka, start Kafka:
+The TV Kitchen Countertop cannot yet be started directly via command line, but running a copy only involves a few lines of code:
 
-```shell
-yarn kafka:start
+```
+import { Countertop } from '@tvkitchen/countertop'
+import { VideoFileIngestionAppliance } from '@tvkitchen/appliance-video-file-ingestion'
+const countertop = new Countertop()
+countertop.addAppliance(new VideoFileIngestionAppliance({ filePath: 'video.mp4' }))
+countertop.start()
 ```
 
-2. Start the kitchen itself
-
-```shell
-yarn start
-```
+Granted, this example won't do very much yet, but as you add appliances and event listeners you can start to extract data from your videos and do interesting things with that data!
 
 ## Project Structure
 
@@ -34,11 +36,10 @@ The root structure is as follows:
 - docs     // Project documentation
 - services // Convenience containers for various external services (e.g. Kafka)
 - src      // The primary code location itself
-| - components // Architectural components
-| - constants  // Constants used throughout the project
-| - tools      // Supporting code (e.g. utilities, DB singletons, etc)
-| - scripts    // Supporting scripts
-| - tests      // System-wide / integration tests
+| - classes   // Various Countertop elements
+| - tools     // Supporting code (e.g. utilities, DB singletons, etc)
+| - scripts   // Supporting scripts
+| - tests     // System-wide / integration tests
 ```
 
 ## Participating

@@ -2,7 +2,7 @@ import { by } from '%src/tools/utils'
 import {
 	CountertopStation,
 	CountertopStream,
-} from '%src/components/countertop'
+} from '%src/classes'
 import {
 	generateMockAppliance,
 	normalizeTributaryMaps,

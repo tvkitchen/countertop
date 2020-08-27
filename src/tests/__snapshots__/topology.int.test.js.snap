@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`CountertopCoordinator updateTopology Should generate correct simple linear topologies 1`] = `
+exports[`Countertop #integration updateTopology Should generate correct simple linear topologies 1`] = `
 Array [
   Object {
     "mouth": 0,
@@ -21,7 +21,7 @@ Array [
 ]
 `;
 
-exports[`CountertopCoordinator updateTopology Should generate correct topologies with dual inputs 1`] = `
+exports[`Countertop #integration updateTopology Should generate correct topologies with dual inputs 1`] = `
 Array [
   Object {
     "mouth": 0,
@@ -81,7 +81,7 @@ Array [
 ]
 `;
 
-exports[`CountertopCoordinator updateTopology Should generate correct topologies with dual output appliances 1`] = `
+exports[`Countertop #integration updateTopology Should generate correct topologies with dual output appliances 1`] = `
 Array [
   Object {
     "mouth": 0,
@@ -102,7 +102,7 @@ Array [
 ]
 `;
 
-exports[`CountertopCoordinator updateTopology Should generate correct topologies with dual outputs 1`] = `
+exports[`Countertop #integration updateTopology Should generate correct topologies with dual outputs 1`] = `
 Array [
   Object {
     "mouth": 0,
@@ -203,7 +203,7 @@ Array [
 ]
 `;
 
-exports[`CountertopCoordinator updateTopology Should generate correct topologies with multiple sources 1`] = `
+exports[`Countertop #integration updateTopology Should generate correct topologies with multiple sources 1`] = `
 Array [
   Object {
     "mouth": 0,
