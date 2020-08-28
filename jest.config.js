@@ -1,6 +1,5 @@
-const settings = {
-	setupFiles: ['./lib/utils/jest.setup.js'],
+module.exports = {
+  "testPathIgnorePatterns": ["<rootDir>/lib/"],
+	setupFiles: ['./setup/utils/jest.setup.js'],
 	silent: true,
 }
-
-module.exports = settings
