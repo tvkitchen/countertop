@@ -1,3 +1,4 @@
+import { consoleLogger } from '../tools/loggers'
 import CountertopStation from './CountertopStation'
 import CountertopTopology from './CountertopTopology'
 
@@ -9,20 +10,34 @@ import CountertopTopology from './CountertopTopology'
  * the countertop architecture.
  */
 class Countertop {
+	logger = null
+
 	stations = []
+
+	/**
+	 * @param  {Logger} options.logger A logger with methods for all TV Kitchen logLevels.
+	 */
+	constructor({
+		logger = consoleLogger,
+	} = {}) {
+		this.logger = logger
+	}
 
 	/**
 	 * Register a new, configured appliance into the countertop.
 	 * Appliances that ingest Payload streams may be cloned as new streams are created.
 	 *
-	 * @param  {Class}  Appliance     The class of the IAppliance being registered.
-	 * @param  {String} configuration The configuration used to register the appliance station.
-	 * @return {CountertopStation}    The station created for this appliance.
+	 * @param  {Class}  Appliance         The class of the IAppliance being registered.
+	 * @param  {Object} applianceSettings The settings to be passed to the appliance.
+	 * @return {CountertopStation}        The station created for this appliance.
 	 */
-	addAppliance = (Appliance, configuration) => {
+	addAppliance = (Appliance, applianceSettings = {}) => {
 		const station = new CountertopStation(
 			Appliance,
-			configuration,
+			applianceSettings,
+			{
+				logger: this.logger,
+			},
 		)
 		this.stations.push(station)
 		return station
