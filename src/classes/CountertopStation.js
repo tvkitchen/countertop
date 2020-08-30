@@ -1,26 +1,34 @@
 import { v4 as uuid } from 'uuid'
+import { consoleLogger } from '../tools/loggers'
 
 class CountertopStation {
+	logger = null
+
 	id = null
 
 	Appliance = null
 
-	configuration = null
+	applianceSettings = null
 
 	workers = []
 
 	/**
 	 * Create a CountertopStation
 	 *
-	 * @param  {Class}  Appliance     The IAppliance class that this station will manage.
-	 * @param  {Object} configuration The station and appliance configuration.
+	 * @param  {Class}  Appliance         The IAppliance class that this station will manage.
+	 * @param  {Object} applianceSettings Settings for the appliance.
+	 * @param  {Logger} options.logger    A logger with methods for all TV Kitchen logLevels.
 	 */
 	constructor(
 		Appliance,
-		configuration = {},
+		applianceSettings = {},
+		{
+			logger = consoleLogger,
+		} = {},
 	) {
 		this.Appliance = Appliance
-		this.configuration = configuration
+		this.applianceSettings = applianceSettings
+		this.logger = logger
 		this.id = `${Appliance.name}::${uuid()}`
 	}
 

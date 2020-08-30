@@ -3,7 +3,7 @@ module.exports = {
 	"parser": "babel-eslint",
 	"rules": {
 		"semi": [2, "never"],
-		"indent": [2, "tab"],
+		"indent": [2, "tab", {"SwitchCase": 1}],
 		"no-tabs": 0
 	},
 	"env": {
