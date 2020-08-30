@@ -1133,12 +1133,7 @@
   resolved "https://registry.yarnpkg.com/@tvkitchen/base-classes/-/base-classes-1.1.0.tgz#c74d79b4b1181e529d2ed7f0eb2f62e95b9781c8"
   integrity sha512-t0ID7KzM1mwlWtZq9cJppuLKjpSWKo2VQl6ToKRWmf2T+6SwSaayE5ThSId1gGCn4JoBITUwF6HEwMpGvxfcGw==
 
-"@tvkitchen/base-constants@^1.0.0":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@tvkitchen/base-constants/-/base-constants-1.0.1.tgz#f5f89ba22c55fb8ec57ee685cb5473ecf7893a31"
-  integrity sha512-i77NYp6qLX0DTy4cpm2uj3F9SA+g+Qt7I7dTsILJyWgKUIHjuF3Fl/3J+vWHY7RJ+W4Y2SQ28/E+2CV2quBg6A==
-
-"@tvkitchen/base-constants@^1.1.1":
+"@tvkitchen/base-constants@^1.1.1", "@tvkitchen/base-constants@^1.2.0":
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@tvkitchen/base-constants/-/base-constants-1.2.0.tgz#020246bd1ff700e67066eea2e708dc5254cbcb9d"
   integrity sha512-9oyAYcMwWH1NiM9kFJ6yxameRBb58gq3/NCPBcXxVRe8IdHnQ3XKVC0fw0J3pfeOgOHayEeVTtEcSx4FlhilOw==
