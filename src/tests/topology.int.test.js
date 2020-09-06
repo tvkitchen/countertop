@@ -7,7 +7,7 @@ import {
 
 describe('Countertop #integration', () => {
 	describe('updateTopology', () => {
-		it('Should generate correct simple linear topologies', () => {
+		it('Should generate correct simple linear topologies', async () => {
 			const countertop = new Countertop()
 			const sourceAppliance = countertop.addAppliance(generateMockAppliance({
 				inputTypes: [],
@@ -17,7 +17,7 @@ describe('Countertop #integration', () => {
 				inputTypes: [dataTypes.STREAM.CONTAINER],
 				outputTypes: [dataTypes.TEXT.ATOM],
 			}))
-			const topology = countertop.updateTopology()
+			const topology = await countertop.updateTopology()
 			const stations = [
 				sourceAppliance,
 				captionAppliance,
@@ -25,7 +25,7 @@ describe('Countertop #integration', () => {
 			expect(normalizeStreams(topology.streams, stations)).toMatchSnapshot()
 		})
 
-		it('Should generate correct topologies with multiple sources', () => {
+		it('Should generate correct topologies with multiple sources', async () => {
 			const countertop = new Countertop()
 			const sourceApplianceA = countertop.addAppliance(generateMockAppliance({
 				inputTypes: [],
@@ -39,7 +39,7 @@ describe('Countertop #integration', () => {
 				inputTypes: [dataTypes.STREAM.CONTAINER],
 				outputTypes: [dataTypes.TEXT.ATOM],
 			}))
-			const topology = countertop.updateTopology()
+			const topology = await countertop.updateTopology()
 			const stations = [
 				sourceApplianceA,
 				sourceApplianceB,
@@ -48,7 +48,7 @@ describe('Countertop #integration', () => {
 			expect(normalizeStreams(topology.streams, stations)).toMatchSnapshot()
 		})
 
-		it('Should generate correct topologies with dual inputs', () => {
+		it('Should generate correct topologies with dual inputs', async () => {
 			const countertop = new Countertop()
 			const sourceAppliance = countertop.addAppliance(generateMockAppliance({
 				inputTypes: [],
@@ -66,7 +66,7 @@ describe('Countertop #integration', () => {
 				inputTypes: [dataTypes.TEXT.ATOM, 'IMAGE.JPEG'],
 				outputTypes: ['IMAGE.GIF'],
 			}))
-			const topology = countertop.updateTopology()
+			const topology = await countertop.updateTopology()
 			const stations = [
 				sourceAppliance,
 				captionAppliance,
@@ -76,7 +76,7 @@ describe('Countertop #integration', () => {
 			expect(normalizeStreams(topology.streams, stations)).toMatchSnapshot()
 		})
 
-		it('Should generate correct topologies with dual output appliances', () => {
+		it('Should generate correct topologies with dual output appliances', async () => {
 			const countertop = new Countertop()
 			const sourceAppliance = countertop.addAppliance(generateMockAppliance({
 				inputTypes: [],
@@ -86,7 +86,7 @@ describe('Countertop #integration', () => {
 				inputTypes: [dataTypes.STREAM.CONTAINER],
 				outputTypes: [dataTypes.TEXT.ATOM, 'IMAGE.JPEG'],
 			}))
-			const topology = countertop.updateTopology()
+			const topology = await countertop.updateTopology()
 			const stations = [
 				sourceAppliance,
 				complexOutputAppliance,
@@ -94,7 +94,7 @@ describe('Countertop #integration', () => {
 			expect(normalizeStreams(topology.streams, stations)).toMatchSnapshot()
 		})
 
-		it('Should generate correct topologies with dual outputs', () => {
+		it('Should generate correct topologies with dual outputs', async () => {
 			const countertop = new Countertop()
 			const sourceAppliance = countertop.addAppliance(generateMockAppliance({
 				inputTypes: [],
@@ -112,7 +112,7 @@ describe('Countertop #integration', () => {
 				inputTypes: [dataTypes.TEXT.ATOM],
 				outputTypes: [dataTypes.TEXT.SENTENCE],
 			}))
-			const topology = countertop.updateTopology()
+			const topology = await countertop.updateTopology()
 			const stations = [
 				sourceAppliance,
 				complexOutputAppliance,

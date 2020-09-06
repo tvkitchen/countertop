@@ -99,7 +99,7 @@ class CountertopTopology {
 	/**
 	 * Generates streams that only include source stations.
 	 *
-	 * These stream will, by defintiion, be of length 1.
+	 * These streams will, by defintiion, be of length 1.
 	 *
 	 * @param  {CountertopStations[]} stations The stations to be processed.
 	 * @return {CountertopStreams[]}           The resulting streams.
