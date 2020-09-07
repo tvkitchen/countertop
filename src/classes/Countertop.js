@@ -120,6 +120,20 @@ class Countertop {
 	 * This is an internal method.
 	 */
 	setState = (state) => { this.state = state }
+
+	/**
+	 * Registers a listener to the Countertop for a given event type.
+	 *
+	 * Event types are defined in @tvkitchen/base-constants
+	 *
+	 * @param  {String} eventType  The type of event being listened to.
+	 * @param  {Function} listener The listener to be registered for that event.
+	 * @return {Countertop}        The countertop instance (to enable chaining).
+	 */
+	on = (eventType, listener) => {
+		this.stations.forEach((station) => station.on(eventType, listener))
+		return this
+	}
 }
 
 export default Countertop
