@@ -5,6 +5,8 @@ import {
 	normalizeStreams,
 } from '../tools/utils/jest'
 
+jest.mock('kafkajs')
+
 describe('Countertop #integration', () => {
 	describe('updateTopology', () => {
 		it('Should generate correct simple linear topologies', async () => {

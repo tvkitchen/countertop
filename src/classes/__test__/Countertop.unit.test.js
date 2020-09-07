@@ -6,6 +6,8 @@ import {
 	generateMockAppliance,
 } from '../../tools/utils/jest'
 
+jest.mock('kafkajs')
+
 describe('Countertop #unit', () => {
 	describe('constructor', () => {
 		it('Should accept a custom logger', () => {

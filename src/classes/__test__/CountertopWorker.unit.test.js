@@ -1,9 +1,12 @@
+import { Kafka } from 'kafkajs'
 import CountertopWorker from '../CountertopWorker'
 import CountertopStation from '../CountertopStation'
 import CountertopStream from '../CountertopStream'
 import {
 	generateMockAppliance,
 } from '../../tools/utils/jest'
+
+jest.mock('kafkajs')
 
 describe('CountertopWorker #unit', () => {
 	describe('constructor', () => {
@@ -34,7 +37,10 @@ describe('CountertopWorker #unit', () => {
 			const worker = new CountertopWorker(
 				Appliance,
 				null,
-				{ stream },
+				{
+					stream,
+					kafka: new Kafka(),
+				},
 			)
 			expect(await worker.start()).toBe(false)
 		})

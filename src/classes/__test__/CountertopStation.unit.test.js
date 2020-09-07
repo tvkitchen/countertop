@@ -1,8 +1,11 @@
+import { Kafka } from 'kafkajs'
 import CountertopStation from '../CountertopStation'
 import CountertopTopology from '../CountertopTopology'
 import {
 	generateMockAppliance,
 } from '../../tools/utils/jest'
+
+jest.mock('kafkajs')
 
 describe('CountertopStation #unit', () => {
 	describe('constructor', () => {
@@ -43,7 +46,11 @@ describe('CountertopStation #unit', () => {
 				inputTypes: [],
 				outputTypes: ['bar'],
 			})
-			const countertopStation = new CountertopStation(appliance)
+			const countertopStation = new CountertopStation(
+				appliance,
+				{},
+				{ kafka: new Kafka() },
+			)
 			const topology = new CountertopTopology([countertopStation])
 			const workers = await countertopStation.invokeTopology(topology)
 			expect(workers.length).toEqual(1)
