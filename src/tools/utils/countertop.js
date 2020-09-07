@@ -1,4 +1,5 @@
 import { arraysHaveOverlap } from '.'
+import { sanitizeTopic } from './kafka'
 
 /**
  * Returns a list of stations that are considered sources.
@@ -153,3 +154,12 @@ export const generateTributaryMaps = (station, streamOutputMap) => {
 		},
 	)
 }
+
+/**
+ * Returns the kafka topic associated with a given stream + type pair.
+ *
+ * @param  {String}           dataType The data type.
+ * @param  {CountertopStream} stream   The stream.
+ * @return {String}                    The resulting kafka topic.
+ */
+export const getStreamTopic = (dataType, stream) => sanitizeTopic(`${dataType}::${stream.id}`)

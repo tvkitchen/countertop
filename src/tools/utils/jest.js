@@ -18,11 +18,25 @@ export const loadTestData = (testDirectory, fileName) => JSON.parse(fs.readFileS
  * @param  {String[]} options.outputTypes The mocked output types value.
  * @return {Class}                        The resulting mock class.
  */
-export const generateMockAppliance = ({ inputTypes, outputTypes }) => {
+export const generateMockAppliance = ({
+	inputTypes,
+	outputTypes,
+	audit = async () => true,
+	start = async () => true,
+	stop = async () => true,
+}) => {
 	class MockAppliance extends IAppliance {
 		static getInputTypes = () => inputTypes
 
 		static getOutputTypes = () => outputTypes
+
+		on = () => true
+
+		audit = audit
+
+		start = start
+
+		stop = stop
 	}
 	return MockAppliance
 }
