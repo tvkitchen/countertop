@@ -6,6 +6,8 @@ import CountertopWorker from './CountertopWorker'
 class CountertopStation {
 	logger = null
 
+	kafka = null
+
 	id = null
 
 	Appliance = null
@@ -28,14 +30,16 @@ class CountertopStation {
 		applianceSettings = {},
 		{
 			logger = consoleLogger,
+			kafka,
 		} = {},
 	) {
-		if (typeof Appliance === 'undefined') {
+		if (Appliance === undefined) {
 			throw new Error('CountertopStation requires an Appliance.')
 		}
 		this.Appliance = Appliance
 		this.applianceSettings = applianceSettings
 		this.logger = logger
+		this.kafka = kafka
 		this.id = `${Appliance.name}::${uuid()}`
 		this.setState(countertopStates.STOPPED)
 	}
@@ -55,7 +59,11 @@ class CountertopStation {
 		this.workers = stationStreams.map((stream) => new CountertopWorker(
 			this.Appliance,
 			this.applianceSettings,
-			{ stream },
+			{
+				stream,
+				logger: this.logger,
+				kafka: this.kafka,
+			},
 		))
 		return this.workers
 	}

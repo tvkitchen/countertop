@@ -3,8 +3,8 @@ language: node_js
 services:
   - docker
 
-before_script:
-  - npm run kafka:start
+before_install:
+  - docker-compose -f services/kafka/docker-compose.yml up -d
 
 script:
   - npm run lint

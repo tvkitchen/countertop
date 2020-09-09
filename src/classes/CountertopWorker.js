@@ -3,7 +3,6 @@ import { IAppliance } from '@tvkitchen/base-interfaces'
 import { Payload } from '@tvkitchen/base-classes'
 import { applianceEvents } from '@tvkitchen/base-constants'
 import { consoleLogger } from '../tools/loggers'
-import kafka from '../tools/kafka'
 import { getStreamTopic } from '../tools/utils/countertop'
 
 /**
@@ -18,6 +17,8 @@ class CountertopWorker {
 
 	id = null
 
+	kafka = null
+
 	consumer = null
 
 	producer = null
@@ -31,9 +32,11 @@ class CountertopWorker {
 	/**
 	 * Create a new CountertopWorker.
 	 *
-	 * @param  {Class}            Appliance     The class for the appliance that this worker will use.
-	 * @param  {CountertopStream} stream        A stream that ends in this worker's station.
-	 * @param  {Object}           configuration Configuration settings for the Appliance.
+	 * @param  {Class}            Appliance         The appliance class this worker will use.
+	 * @param  {Object}           applianceSettings The settings to be passed to the appliance.
+	 * @param  {CountertopStream} options.stream    The stream this worker is tracking.
+	 * @param  {Logger}           options.logger    The logger the worker should use.
+	 * @param  {KafkaJS}          options.kafka     The kafkajs object the worker will use.
 	 */
 	constructor(
 		Appliance,
@@ -41,14 +44,16 @@ class CountertopWorker {
 		{
 			stream,
 			logger = consoleLogger,
+			kafka,
 		} = {},
 	) {
 		this.id = `CountertopWorker::${Appliance.name}::${uuid()}`
 		this.stream = stream
 		this.logger = logger
-		this.consumer = kafka.consumer({ groupId: this.id })
-		this.producer = kafka.producer()
-		this.admin = kafka.admin()
+		this.kafka = kafka
+		this.consumer = this.kafka.consumer({ groupId: this.id })
+		this.producer = this.kafka.producer()
+		this.admin = this.kafka.admin()
 		this.appliance = new Appliance(applianceSettings)
 		if (!IAppliance.isIAppliance(this.appliance)) {
 			throw new Error('TVKitchen can only use Appliances that extend IAppliance.')

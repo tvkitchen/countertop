@@ -1,3 +1,4 @@
+import { Kafka } from 'kafkajs'
 import { countertopStates } from '../constants'
 import { consoleLogger } from '../tools/loggers'
 import CountertopStation from './CountertopStation'
@@ -13,18 +14,23 @@ import CountertopTopology from './CountertopTopology'
 class Countertop {
 	logger = null
 
+	kafka = null
+
 	stations = []
 
 	state = ''
 
 	/**
-	 * @param  {Logger} options.logger A logger with methods for all TV Kitchen logLevels.
+	 * @param  {Logger} options.logger        A logger with methods for all TV Kitchen logLevels.
+	 * @param  {Object} options.kafkaSettings Kafka settings as defined in the kafkajs library.
 	 */
 	constructor({
 		logger = consoleLogger,
+		kafkaSettings = {},
 	} = {}) {
 		this.logger = logger
 		this.setState(countertopStates.STOPPED)
+		this.kafka = new Kafka(kafkaSettings)
 	}
 
 	/**
@@ -46,6 +52,7 @@ class Countertop {
 			applianceSettings,
 			{
 				logger: this.logger,
+				kafka: this.kafka,
 			},
 		)
 		this.stations.push(station)
