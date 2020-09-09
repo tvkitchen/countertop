@@ -7,5 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.0] - 2020-09-09
+
 ### Added
 - Initial implementation of the `countertop` package.
+
+[Unreleased]: https://github.com/tvkitchen/countertop/releases/tag/@tvkitchen/countertop@0.1.0...HEAD
+[0.1.0]: https://github.com/tvkitchen/countertop/releases/tag/@tvkitchen/countertop@0.1.0

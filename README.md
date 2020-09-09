@@ -26,6 +26,8 @@ countertop.start()
 
 Granted, this example won't do very much yet, but as you add appliances and event listeners you can start to extract data from your videos and do interesting things with that data!
 
+You can look at the [cookbook](https://github.com/tvkitchen/cookbook) for various working examples of countertops.
+
 ## Project Structure
 
 To understand the overall architecture of the project, please review our [architecture documentation](docs/ARCHITECTURE.md).
