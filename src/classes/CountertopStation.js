@@ -115,18 +115,32 @@ class CountertopStation {
 	getOutputTypes = () => this.Appliance.getOutputTypes()
 
 	/**
-	 * Get the current state of the CountertopWorker.
+	 * Get the current state of the CountertopStation.
 	 *
-	 * @return {String} The state of the CountertopWorker.
+	 * @return {String} The state of the CountertopStation.
 	 */
 	getState = () => this.state
 
 	/**
-	 * Set the current state of the Countertop.
+	 * Set the current state of the CountertopStation.
 	 *
 	 * This is an internal method.
 	 */
 	setState = (state) => { this.state = state }
+
+	/**
+	 * Registers a listener to the CountertopStation for a given event type.
+	 *
+	 * Event types are defined in @tvkitchen/base-constants
+	 *
+	 * @param  {String} eventType  The type of event being listened to.
+	 * @param  {Function} listener The listener to be registered for that event.
+	 * @return {CountertopStation} The CountertopStation instance (to enable chaining).
+	 */
+	on = (eventType, listener) => {
+		this.workers.forEach((worker) => worker.on(eventType, listener))
+		return this
+	}
 }
 
 export default CountertopStation

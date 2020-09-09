@@ -131,6 +131,20 @@ class CountertopWorker {
 		await this.admin.disconnect()
 		return true
 	}
+
+	/**
+	 * Registers a listener to the CountertopWorker for a given event type.
+	 *
+	 * Event types are defined in @tvkitchen/base-constants
+	 *
+	 * @param  {String} eventType  The type of event being listened to.
+	 * @param  {Function} listener The listener to be registered for that event.
+	 * @return {CountertopWorker}  The CountertopWorker instance (to enable chaining).
+	 */
+	on = (eventType, listener) => {
+		this.appliance.on(eventType, listener)
+		return this
+	}
 }
 
 export default CountertopWorker
