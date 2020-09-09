@@ -1,6 +1,6 @@
 import { Kafka } from 'kafkajs'
 import { countertopStates } from '../constants'
-import { consoleLogger } from '../tools/loggers'
+import { silentLogger } from '../tools/loggers'
 import CountertopStation from './CountertopStation'
 import CountertopTopology from './CountertopTopology'
 
@@ -25,7 +25,7 @@ class Countertop {
 	 * @param  {Object} options.kafkaSettings Kafka settings as defined in the kafkajs library.
 	 */
 	constructor({
-		logger = consoleLogger,
+		logger = silentLogger,
 		kafkaSettings = {},
 	} = {}) {
 		this.logger = logger
