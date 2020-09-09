@@ -1,6 +1,6 @@
 import { v4 as uuid } from 'uuid'
 import { IAppliance } from '@tvkitchen/base-interfaces'
-import { Payload } from '@tvkitchen/base-classes'
+import { AvroPayload } from '@tvkitchen/base-classes'
 import { applianceEvents } from '@tvkitchen/base-constants'
 import { consoleLogger } from '../tools/loggers'
 import { getStreamTopic } from '../tools/utils/countertop'
@@ -64,7 +64,7 @@ class CountertopWorker {
 			(payload) => this.producer.send({
 				topic: getStreamTopic(payload.type, this.stream),
 				messages: [{
-					value: Payload.serialize(payload),
+					value: AvroPayload.serialize(payload),
 				}],
 			}),
 		)
@@ -111,7 +111,7 @@ class CountertopWorker {
 		await this.consumer.run({
 			eachMessage: async ({ message }) => {
 				this.logger.debug(`CountertopWorker<${this.stream.id}>.consumer: eachMessage()`)
-				const payload = Payload.deserialize(message.value)
+				const payload = AvroPayload.deserialize(message.value)
 				await this.appliance.ingestPayload(payload)
 			},
 		})
