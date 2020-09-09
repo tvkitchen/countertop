@@ -110,7 +110,7 @@ class CountertopWorker {
 		}
 		await this.consumer.run({
 			eachMessage: async ({ message }) => {
-				this.logger.debug(`CountertopWorker<${this.stream.id}>.consumer: eachMessage()`)
+				this.logger.trace(`CountertopWorker<${this.stream.id}>.consumer: eachMessage()`)
 				const payload = AvroPayload.deserialize(message.value)
 				await this.appliance.ingestPayload(payload)
 			},
