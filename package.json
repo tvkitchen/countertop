@@ -2,12 +2,9 @@
   "name": "@tvkitchen/countertop",
   "version": "0.1.0",
   "description": "The entry point for developers who want to set up a TV Kitchen.",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
     "build": "yarn run babel src -d lib",
-    "kafka": "yarn kafka:start",
-    "kafka:start": "./services/kafka/start.sh",
-    "kafka:stop": "./services/kafka/stop.sh",
     "lint": "./node_modules/.bin/eslint 'src/**/*.js'",
     "sandbox": "babel-node -- src/scripts/_sandbox",
     "start": "yarn babel-node src/index.js",
