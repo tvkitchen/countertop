@@ -18,7 +18,7 @@ const log = (level, message) => {
 		case logLevels.debug:
 			return console.debug(structuredMessage)
 		case logLevels.trace:
-			return console.trace(structuredMessage)
+			return console.debug(structuredMessage)
 		default:
 			return console.log(structuredMessage)
 	}
