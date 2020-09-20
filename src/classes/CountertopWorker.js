@@ -1,3 +1,4 @@
+import { Writable } from 'stream'
 import { v4 as uuid } from 'uuid'
 import { IAppliance } from '@tvkitchen/base-interfaces'
 import { AvroPayload } from '@tvkitchen/base-classes'
@@ -55,18 +56,25 @@ class CountertopWorker {
 		this.producer = this.kafka.producer()
 		this.admin = this.kafka.admin()
 		this.appliance = new Appliance(applianceSettings)
+		const kafkaOutputStream = new Writable({
+			objectMode: true,
+			write: async (payload, enc, done) => {
+				await this.producer.send({
+					topic: getStreamTopic(payload.type, this.stream),
+					messages: [{
+						value: AvroPayload.serialize(payload),
+					}],
+				})
+				done()
+			},
+		})
 		if (!IAppliance.isIAppliance(this.appliance)) {
 			throw new Error('TVKitchen can only use Appliances that extend IAppliance.')
 		}
 
 		this.appliance.on(
 			applianceEvents.PAYLOAD,
-			(payload) => this.producer.send({
-				topic: getStreamTopic(payload.type, this.stream),
-				messages: [{
-					value: AvroPayload.serialize(payload),
-				}],
-			}),
+			(payload) => kafkaOutputStream.write(payload),
 		)
 	}
 
