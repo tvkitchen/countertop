@@ -6,6 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Changed
+- Removed an old configuration file.
+- Removed unused dependencies.
+- Test libraries are now properly categorized as `devDependencies`.
+
 ### Fixed
 - Message ordering from CountertopWorkers are now guaranteed.
 
