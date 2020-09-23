@@ -22,7 +22,7 @@ class Countertop {
 
 	/**
 	 * @param  {Logger} options.logger        A logger with methods for all TV Kitchen logLevels.
-	 * @param  {Object} options.kafkaSettings Kafka settings as defined in the kafkajs library.
+	 * @param  {Object} options.kafkaSettings Kafka settings as defined in the KafkaJS library.
 	 */
 	constructor({
 		logger = silentLogger,
@@ -30,7 +30,10 @@ class Countertop {
 	} = {}) {
 		this.logger = logger
 		this.setState(countertopStates.STOPPED)
-		this.kafka = new Kafka(kafkaSettings)
+		this.kafka = new Kafka({
+			brokers: ['127.0.0.1:9092'],
+			...kafkaSettings,
+		})
 	}
 
 	/**
