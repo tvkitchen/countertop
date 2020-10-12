@@ -24,7 +24,7 @@
     "news"
   ],
   "author": "Bad Idea Factory <biffuddotcom@biffud.com>",
-  "license": "Apache-2.0",
+  "license": "LGPL-3.0",
   "bugs": {
     "url": "https://github.com/tvkitchen/tv-kitchen/issues"
   },
