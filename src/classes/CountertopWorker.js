@@ -2,7 +2,6 @@ import { Writable } from 'stream'
 import { v4 as uuid } from 'uuid'
 import { IAppliance } from '@tvkitchen/base-interfaces'
 import { AvroPayload } from '@tvkitchen/base-classes'
-import { applianceEvents } from '@tvkitchen/base-constants'
 import { consoleLogger } from '../tools/loggers'
 import { getStreamTopic } from '../tools/utils/countertop'
 
@@ -55,8 +54,14 @@ class CountertopWorker {
 		this.consumer = this.kafka.consumer({ groupId: this.id })
 		this.producer = this.kafka.producer()
 		this.admin = this.kafka.admin()
-		this.appliance = new Appliance(applianceSettings)
-		const kafkaOutputStream = new Writable({
+		this.appliance = new Appliance({
+			logger,
+			...applianceSettings,
+		})
+		if (!IAppliance.isIAppliance(this.appliance)) {
+			throw new Error('TVKitchen can only use Appliances that extend IAppliance.')
+		}
+		const kafkaWriteStream = new Writable({
 			objectMode: true,
 			write: async (payload, enc, done) => {
 				await this.producer.send({
@@ -68,14 +73,7 @@ class CountertopWorker {
 				done()
 			},
 		})
-		if (!IAppliance.isIAppliance(this.appliance)) {
-			throw new Error('TVKitchen can only use Appliances that extend IAppliance.')
-		}
-
-		this.appliance.on(
-			applianceEvents.PAYLOAD,
-			(payload) => kafkaOutputStream.write(payload),
-		)
+		this.appliance.pipe(kafkaWriteStream)
 	}
 
 	/**
@@ -120,7 +118,13 @@ class CountertopWorker {
 			eachMessage: async ({ message }) => {
 				this.logger.trace(`CountertopWorker<${this.stream.id}>.consumer: eachMessage()`)
 				const payload = AvroPayload.deserialize(message.value)
-				await this.appliance.ingestPayload(payload)
+				return new Promise((resolve, reject) => {
+					try {
+						this.appliance.write(payload, resolve)
+					} catch (err) {
+						reject(err)
+					}
+				})
 			},
 		})
 		return true
