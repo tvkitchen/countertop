@@ -24,7 +24,7 @@
     "news"
   ],
   "author": "Bad Idea Factory <biffuddotcom@biffud.com>",
-  "license": "Apache-2.0",
+  "license": "LGPL-3.0",
   "bugs": {
     "url": "https://github.com/tvkitchen/tv-kitchen/issues"
   },
@@ -33,7 +33,7 @@
     "@tvkitchen/base-classes": "1.4.0-alpha.1",
     "@tvkitchen/base-constants": "^1.2.0",
     "@tvkitchen/base-errors": "^1.0.0",
-    "@tvkitchen/base-interfaces": "4.0.0-alpha.2",
+    "@tvkitchen/base-interfaces": "4.0.0-alpha.3",
     "kafkajs": "^1.12.0",
     "uuid": "^8.3.0"
   },

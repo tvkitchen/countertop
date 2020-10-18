@@ -1135,7 +1135,7 @@
   dependencies:
     avsc "^5.4.21"
 
-"@tvkitchen/base-constants@^1.1.1", "@tvkitchen/base-constants@^1.2.0":
+"@tvkitchen/base-constants@^1.2.0":
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@tvkitchen/base-constants/-/base-constants-1.2.0.tgz#020246bd1ff700e67066eea2e708dc5254cbcb9d"
   integrity sha512-9oyAYcMwWH1NiM9kFJ6yxameRBb58gq3/NCPBcXxVRe8IdHnQ3XKVC0fw0J3pfeOgOHayEeVTtEcSx4FlhilOw==
@@ -1145,12 +1145,11 @@
   resolved "https://registry.yarnpkg.com/@tvkitchen/base-errors/-/base-errors-1.0.1.tgz#1117e17c8a0888989ad155d1318d03b6a6ab942f"
   integrity sha512-AHb+LYbughr1dggUFiAA7y079ZRrjgLiW2KOJgeHbQXSr1kcaxcAnISUV8e1EYuUODhmN1FD8ka9T0d9+RLzKQ==
 
-"@tvkitchen/base-interfaces@4.0.0-alpha.2":
-  version "4.0.0-alpha.2"
-  resolved "https://registry.yarnpkg.com/@tvkitchen/base-interfaces/-/base-interfaces-4.0.0-alpha.2.tgz#9eee6837a0a8b33828186bef7564bb1084816e0e"
-  integrity sha512-B+clkl+hHVQNJ5nLgQWC+0Q22g/X0/UqWLRFLDE5sBBx1QzyxJm6Dp3miBvgcU9lJS/aqpsljEuNDY2hHTrzKw==
+"@tvkitchen/base-interfaces@4.0.0-alpha.3":
+  version "4.0.0-alpha.3"
+  resolved "https://registry.yarnpkg.com/@tvkitchen/base-interfaces/-/base-interfaces-4.0.0-alpha.3.tgz#bedc37666e5c2798d704d657d93d02d8e27db7c6"
+  integrity sha512-e5y75kEbtacqhGyBSSf4WlPeVY9OrIx6N581JVvBKZbyauyRPT6dRtGix0Avt2NkndNIwGc8LiNPJVuOmq4k8w==
   dependencies:
-    "@tvkitchen/base-constants" "^1.1.1"
     "@tvkitchen/base-errors" "^1.0.0"
 
 "@types/babel__core@^7.1.0":
