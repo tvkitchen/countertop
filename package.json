@@ -30,7 +30,7 @@
   },
   "homepage": "https://tv.kitchen",
   "dependencies": {
-    "@tvkitchen/base-classes": "1.4.0-alpha.1",
+    "@tvkitchen/base-classes": "1.4.0-alpha.2",
     "@tvkitchen/base-constants": "^1.2.0",
     "@tvkitchen/base-errors": "^1.0.0",
     "@tvkitchen/base-interfaces": "4.0.0-alpha.3",
