@@ -1128,10 +1128,10 @@
   dependencies:
     type-detect "4.0.8"
 
-"@tvkitchen/base-classes@1.4.0-alpha.1":
-  version "1.4.0-alpha.1"
-  resolved "https://registry.yarnpkg.com/@tvkitchen/base-classes/-/base-classes-1.4.0-alpha.1.tgz#af55076cb06e24907707e3c5f59133b098f830a8"
-  integrity sha512-Ge0+3lEpKpBP8fXCgP4Prhie/JKj/xa/MYzOQSjF8tQNAzIUtj7dhrHjt5UWniJAk4f0iDqpPS7xNGCPSjNrTw==
+"@tvkitchen/base-classes@1.4.0-alpha.2":
+  version "1.4.0-alpha.2"
+  resolved "https://registry.yarnpkg.com/@tvkitchen/base-classes/-/base-classes-1.4.0-alpha.2.tgz#8bf355433bd088d5a2fa07de00d25105dcdfcc9a"
+  integrity sha512-xH0PS08AObEG2ZxnOrAbMBAb8ReMm8dwTd8ZKK5OyNAU4tSQmx8pLx4JQQIkwckms37RJM4VOrw5Wvulh44ExA==
   dependencies:
     avsc "^5.4.21"
 
