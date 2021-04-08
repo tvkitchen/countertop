@@ -31,7 +31,7 @@ describe('CountertopTopology #unit', () => {
 			const streams = CountertopTopology.extendStreamsByStation([streamA], stationB)
 			expect(streams.length).toBe(1)
 		})
-		it('Should not extend streams if the station is not related', () => {
+		it('Should extend streams even if a station does not have inputs', () => {
 			const ApplianceA = generateMockAppliance({
 				inputTypes: [],
 				outputTypes: ['foo'],
@@ -44,7 +44,7 @@ describe('CountertopTopology #unit', () => {
 			const stationB = new CountertopStation(ApplianceB)
 			const streamA = new CountertopStream(stationA)
 			const streams = CountertopTopology.extendStreamsByStation([streamA], stationB)
-			expect(streams.length).toBe(0)
+			expect(streams.length).toBe(1)
 		})
 	})
 

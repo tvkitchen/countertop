@@ -142,9 +142,14 @@ export const generateTributaryMaps = (station, streamOutputMap) => {
 	const inputTypes = station.getInputTypes()
 	return inputTypes.reduce(
 		(accumulator, type) => accumulator.flatMap(
-			(tributarySet) => (streamOutputMap.get(type) || [])
-				.filter((stream) => stream.getSource() === tributarySet.get('source'))
-				.map((stream) => tributarySet.set(type, stream)),
+			(tributarySet) => {
+				const expandedTributarySets = (streamOutputMap.get(type) || [])
+					.filter((stream) => stream.getSource() === tributarySet.get('source'))
+					.map((stream) => tributarySet.set(type, stream))
+				return (expandedTributarySets.length > 0)
+					? expandedTributarySets
+					: [tributarySet]
+			},
 		),
 		tributarySeeds,
 	).map(

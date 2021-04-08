@@ -21,17 +21,19 @@ class CountertopStream {
 	 * This allows a given countertop to have multiple sources of video data being processed
 	 * simultaneously.
 	 *
-	 * The tributary map MUST be complete. This means that if a station takes in two types of input,
-	 * there must be a tributary (input stream) for each input type.
+	 * The tributary map does not need to be complete -- there can be inputs with no associated
+	 * tributary streams.
+	 *
+	 * The tributary map cannot contain irrelevant streams (the output map should match the inputs).
 	 *
 	 * @param  {CountertopStation} station     The station at the end of the stream.
 	 * @param  {Map}               tributaries The streams that are flowing into the final station.
 	 */
 	constructor(station, tributaries = new Map()) {
-		station.getInputTypes().forEach(
-			(inputType) => assert(
-				tributaries.has(inputType),
-				'Valid streams require one tributary per input type.',
+		Array.from(tributaries.keys()).forEach(
+			(outputType) => assert(
+				station.getInputTypes().includes(outputType),
+				'The tributaries contained an invalid stream type.',
 			),
 		)
 		this.id = `CountertopStream::${uuid()}`
@@ -40,7 +42,7 @@ class CountertopStream {
 		if (station.getInputTypes().length === 0) {
 			this.source = station
 		} else {
-			this.source = getSourcesFromStreamMap(tributaries).pop()
+			this.source = getSourcesFromStreamMap(tributaries).pop() ?? null
 		}
 	}
 

@@ -10,6 +10,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Update `@tvkitchen/base-classes` to version `2.0.0-alpha.1`
 - Update `@tvkitchen/base-interfaces` to version `4.0.0-alpha.4`
 
+### Added
+- Appliances can now be added to a countertop without having sources for any given input.
+
 ## [0.2.1] - 2021-04-07
 ### Changed
 - Update `@tvkitchen/base-classes` to version `1.4.0-alpha.2`
