@@ -4,6 +4,7 @@ services:
   - docker
 
 before_install:
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   - docker-compose -f services/kafka/docker-compose.yml up -d
 
 script:
