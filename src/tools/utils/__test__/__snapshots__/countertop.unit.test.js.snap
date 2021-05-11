@@ -20,5 +20,24 @@ Array [
       },
     },
   },
+  Map {
+    "foo" => Object {
+      "mouth": 2,
+      "source": 2,
+      "tributaryMap": Map {},
+    },
+  },
+]
+`;
+
+exports[`countertop generateTributaryMaps should return a partially populated tributary map if there are not enough outputs for all inputs 1`] = `
+Array [
+  Map {
+    "foo" => Object {
+      "mouth": 0,
+      "source": 0,
+      "tributaryMap": Map {},
+    },
+  },
 ]
 `;

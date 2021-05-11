@@ -295,25 +295,28 @@ describe('countertop', () => {
 				['baz', [streamB]],
 			])
 			const result = generateTributaryMaps(stationD, streamMap)
-			expect(result.length).toBe(1)
 			expect(normalizeTributaryMaps(result, stations)).toMatchSnapshot()
 		})
 
-		it('should return an empty array if a populated output map does not have outputs for all inputs', () => {
+		it('should return a partially populated tributary map if there are not enough outputs for all inputs', () => {
 			const stationA = new CountertopStation(generateMockAppliance({
 				inputTypes: [],
 				outputTypes: ['foo'],
 			}))
 			const stationB = new CountertopStation(generateMockAppliance({
-				inputTypes: ['bar'],
+				inputTypes: ['foo', 'bar'],
 				outputTypes: ['baz'],
 			}))
+			const stations = [
+				stationA,
+				stationB,
+			]
 			const streamA = new CountertopStream(stationA)
 			const streamMap = new Map([
 				['foo', [streamA]],
 			])
 			const result = generateTributaryMaps(stationB, streamMap)
-			expect(result).toEqual([])
+			expect(normalizeTributaryMaps(result, stations)).toMatchSnapshot()
 		})
 	})
 })

@@ -7,14 +7,33 @@ import {
 
 describe('CountertopStream #unit', () => {
 	describe('constructor', () => {
-		it('Should require tributaries for all inputs', () => {
+		it('Should not require tributaries for all inputs', () => {
 			const Appliance = generateMockAppliance({
 				inputTypes: ['bar'],
 				outputTypes: [],
 			})
 			const station = new CountertopStation(Appliance)
-			expect(() => new CountertopStream(station))
-				.toThrow(assert.AssertionError)
+			const stream = new CountertopStream(station)
+			expect(stream.mouth).toBe(station)
+			expect(stream.source).toBe(null)
+		})
+
+		it('Should throw an error when passed irrelevant tributaries', () => {
+			const ApplianceA = generateMockAppliance({
+				inputTypes: [],
+				outputTypes: ['foo'],
+			})
+			const ApplianceB = generateMockAppliance({
+				inputTypes: ['bar'],
+				outputTypes: ['baz'],
+			})
+			const stationA = new CountertopStation(ApplianceA)
+			const stationB = new CountertopStation(ApplianceB)
+			const streamA = new CountertopStream(stationA)
+			expect(() => new CountertopStream(
+				stationB,
+				new Map([['foo', streamA]]),
+			)).toThrow(assert.AssertionError)
 		})
 	})
 
