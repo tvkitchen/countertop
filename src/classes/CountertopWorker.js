@@ -102,7 +102,12 @@ class CountertopWorker {
 			),
 		)
 		const outputTopicConfigs = outputTopics.map(
-			(topic) => ({ topic }),
+			(topic) => ({
+				topic,
+				configEntries: [
+					{ name: 'retention.ms', value: '30000' },
+				],
+			}),
 		)
 		await this.admin.createTopics({
 			waitForLeaders: true,
