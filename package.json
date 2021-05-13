@@ -1,6 +1,6 @@
 {
   "name": "@tvkitchen/countertop",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "The entry point for developers who want to set up a TV Kitchen.",
   "main": "lib/index.js",
   "scripts": {
@@ -22,8 +22,11 @@
     "ocr",
     "captions",
     "fingerprinting",
+    "srt",
     "journalism",
-    "news"
+    "news",
+    "ccextractor",
+    "tvkitchen"
   ],
   "author": "Bad Idea Factory <biffuddotcom@biffud.com>",
   "license": "LGPL-3.0",
