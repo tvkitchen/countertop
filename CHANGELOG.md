@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Update `@tvkitchen/base-classes` to version `2.0.0-alpha.1`
 - Update `@tvkitchen/base-interfaces` to version `4.0.0-alpha.4`
+- Specify Kafka topic data retention times to 30 seconds.
 
 ### Added
 - Appliances can now be added to a countertop without having sources for any given input.
