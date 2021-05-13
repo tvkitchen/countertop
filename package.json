@@ -4,7 +4,9 @@
   "description": "The entry point for developers who want to set up a TV Kitchen.",
   "main": "lib/index.js",
   "scripts": {
-    "build": "yarn run babel src -d lib",
+    "clean": "rimraf lib",
+    "build": "yarn clean && yarn build:transpile",
+    "build:transpile": "yarn run babel src -d lib",
     "lint": "./node_modules/.bin/eslint 'src/**/*.js'",
     "sandbox": "babel-node -- src/scripts/_sandbox",
     "start": "yarn babel-node src/index.js",
@@ -51,7 +53,8 @@
     "eslint-import-resolver-alias": "^1.1.2",
     "eslint-plugin-import": "^2.20.1",
     "jest": "^25.1.0",
-    "nock": "^12.0.2"
+    "nock": "^12.0.2",
+    "rimraf": "^3.0.2"
   },
   "engines": {
     "node": ">=13.10"
