@@ -12,5 +12,5 @@ script:
   - npm run test
 
 node_js:
-  - 13
+  - 16
   - node
