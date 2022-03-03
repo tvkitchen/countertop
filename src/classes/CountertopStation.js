@@ -103,7 +103,7 @@ class CountertopStation {
 	 *
 	 * @return {String[]} The data types that this station processes.
 	 */
-	getInputTypes = () => this.Appliance.getInputTypes()
+	getInputTypes = () => this.Appliance.getInputTypes(this.applianceSettings)
 
 	/**
 	 * Get the data types that this station produces.
@@ -112,7 +112,7 @@ class CountertopStation {
 	 *
 	 * @return {String[]} The data types that this station produces.
 	 */
-	getOutputTypes = () => this.Appliance.getOutputTypes()
+	getOutputTypes = () => this.Appliance.getOutputTypes(this.applianceSettings)
 
 	/**
 	 * Get the current state of the CountertopStation.

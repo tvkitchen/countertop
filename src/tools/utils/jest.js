@@ -21,14 +21,16 @@ export const loadTestData = (testDirectory, fileName) => JSON.parse(fs.readFileS
 export const generateMockAppliance = ({
 	inputTypes,
 	outputTypes,
+	getInputTypes = () => inputTypes,
+	getOutputTypes = () => outputTypes,
 	audit = async () => true,
 	start = async () => true,
 	stop = async () => true,
 }) => {
 	class MockAppliance extends IAppliance {
-		static getInputTypes = () => inputTypes
+		static getInputTypes = getInputTypes
 
-		static getOutputTypes = () => outputTypes
+		static getOutputTypes = getOutputTypes
 
 		on = () => true
 

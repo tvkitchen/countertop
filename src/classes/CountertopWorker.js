@@ -89,13 +89,17 @@ class CountertopWorker {
 		await this.admin.connect()
 		await this.producer.connect()
 		await this.consumer.connect()
-		const inputTopics = this.appliance.constructor.getInputTypes().map(
+		const inputTopics = this.appliance.constructor.getInputTypes(
+			this.appliance.settings,
+		).map(
 			(inputType) => getStreamTopic(
 				inputType,
 				this.stream.getTributaryMap().get(inputType),
 			),
 		)
-		const outputTopics = this.appliance.constructor.getOutputTypes().map(
+		const outputTopics = this.appliance.constructor.getOutputTypes(
+			this.appliance.settings,
+		).map(
 			(outputType) => getStreamTopic(
 				outputType,
 				this.stream,
