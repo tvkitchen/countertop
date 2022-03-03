@@ -30,6 +30,21 @@ describe('jest', () => {
 			expect(MockAppliance.getInputTypes()).toEqual(['foo'])
 			expect(MockAppliance.getOutputTypes()).toEqual(['bar'])
 		})
+
+		it('Should generate an IAppliance with custom input / output type getters', () => {
+			const MockAppliance = generateMockAppliance({
+				getInputTypes: (settings) => settings.inputTypes,
+				getOutputTypes: (settings) => settings.outputTypes,
+			})
+			const mockAppliance = new MockAppliance()
+			const mockSettings = {
+				inputTypes: ['foo'],
+				outputTypes: ['bar'],
+			}
+			expect(IAppliance.isIAppliance(mockAppliance)).toBe(true)
+			expect(MockAppliance.getInputTypes(mockSettings)).toEqual(['foo'])
+			expect(MockAppliance.getOutputTypes(mockSettings)).toEqual(['bar'])
+		})
 	})
 
 	describe('normalizeTributaryMap', () => {

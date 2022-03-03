@@ -88,6 +88,20 @@ describe('CountertopStation #unit', () => {
 			const countertopStation = new CountertopStation(appliance)
 			expect(countertopStation.getInputTypes()).toEqual(['foo'])
 		})
+
+		it('should pass settings to appliance getInputTypes', () => {
+			const appliance = generateMockAppliance({
+				getInputTypes: (settings) => settings.inputTypes,
+			})
+			const settings = {
+				inputTypes: ['foo'],
+			}
+			const countertopStation = new CountertopStation(
+				appliance,
+				settings,
+			)
+			expect(countertopStation.getInputTypes()).toEqual(['foo'])
+		})
 	})
 
 	describe('getOutputTypes', () => {
@@ -97,6 +111,20 @@ describe('CountertopStation #unit', () => {
 				outputTypes: ['bar'],
 			})
 			const countertopStation = new CountertopStation(appliance)
+			expect(countertopStation.getOutputTypes()).toEqual(['bar'])
+		})
+
+		it('should pass settings to appliance getOutputTypes', () => {
+			const appliance = generateMockAppliance({
+				getOutputTypes: (settings) => settings.outputTypes,
+			})
+			const settings = {
+				outputTypes: ['bar'],
+			}
+			const countertopStation = new CountertopStation(
+				appliance,
+				settings,
+			)
 			expect(countertopStation.getOutputTypes()).toEqual(['bar'])
 		})
 	})
