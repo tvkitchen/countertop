@@ -1145,10 +1145,10 @@
   resolved "https://registry.yarnpkg.com/@tvkitchen/base-errors/-/base-errors-1.0.1.tgz#1117e17c8a0888989ad155d1318d03b6a6ab942f"
   integrity sha512-AHb+LYbughr1dggUFiAA7y079ZRrjgLiW2KOJgeHbQXSr1kcaxcAnISUV8e1EYuUODhmN1FD8ka9T0d9+RLzKQ==
 
-"@tvkitchen/base-interfaces@4.0.0-alpha.4":
-  version "4.0.0-alpha.4"
-  resolved "https://registry.yarnpkg.com/@tvkitchen/base-interfaces/-/base-interfaces-4.0.0-alpha.4.tgz#c0820e455c0965de4d49b0c582dddc7013a86b42"
-  integrity sha512-mX/YrsrT3a9HAKEjxuT4D/TRMtN/XuLZKKi9BypHUB9wNwynOg84HrECWaMrSsJGLGn1zUmJk6HtjM2a/CJK9g==
+"@tvkitchen/base-interfaces@4.0.0-alpha.5":
+  version "4.0.0-alpha.5"
+  resolved "https://registry.yarnpkg.com/@tvkitchen/base-interfaces/-/base-interfaces-4.0.0-alpha.5.tgz#bccd905bbb94b635f3ce4bb67123beee103e37c2"
+  integrity sha512-XbI4HwqMqve8Km5Cr9sGmbUluDE3dSPAj20796To38H7OW5mpv3pJJbNVrCTjiUJ1NIB7BHWmVf6/ENB1xuy8A==
   dependencies:
     "@tvkitchen/base-errors" "^1.0.0"
 
