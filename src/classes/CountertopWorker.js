@@ -92,10 +92,18 @@ class CountertopWorker {
 		const inputTopics = this.appliance.constructor.getInputTypes(
 			this.appliance.settings,
 		).map(
-			(inputType) => getStreamTopic(
-				inputType,
-				this.stream.getTributaryMap().get(inputType),
-			),
+			(inputType) => {
+				const inputStream = this.stream.getTributaryMap().get(inputType)
+				if (inputStream) {
+					return getStreamTopic(
+						inputType,
+						inputStream,
+					)
+				}
+				return null
+			},
+		).filter(
+			(topic) => topic !== null,
 		)
 		const outputTopics = this.appliance.constructor.getOutputTypes(
 			this.appliance.settings,
