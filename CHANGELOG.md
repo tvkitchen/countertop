@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - The static `getInputTypes` and `getOutputTypes` Appliance methods are now provided the relevant settings values, allowing for dynamic types.
 
+### Fixed
+- Topologies with Appliances that only have a subset of their input satisfied will no longer break ([Issue #149](https://github.com/tvkitchen/countertop/issues/149)).
+
 ## [0.3.0] - 2021-05-13
 ### Changed
 - Update `@tvkitchen/base-classes` to version `2.0.0-alpha.1`.
