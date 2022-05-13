@@ -1,4 +1,4 @@
 module.exports = {
-  "testPathIgnorePatterns": ["<rootDir>/lib/"],
+  "testPathIgnorePatterns": ["<rootDir>/dist/"],
 	silent: true,
 }

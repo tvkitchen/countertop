@@ -2,7 +2,6 @@ import {
 	sanitizeTopic,
 } from '../kafka'
 
-
 describe('kafka #unit', () => {
 	describe('sanitizeTopic', () => {
 		it('Should not change valid topics', () => {
