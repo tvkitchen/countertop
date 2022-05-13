@@ -5,9 +5,12 @@
   "main": "dist/index.js",
   "scripts": {
     "clean": "rimraf dist",
-    "build": "yarn clean && yarn build:transpile",
+    "build": "yarn clean && yarn build:typescript && yarn build:transpile",
     "build:transpile": "yarn run babel src -d dist",
-    "lint": "./node_modules/.bin/eslint 'src/**/*.js'",
+    "build:typescript": "tsc -p tsconfig.node.json",
+    "lint": "yarn lint:node && yarn lint:typescript",
+    "lint:node": "eslint 'src/**/*.js'",
+    "lint:typescript": "eslint ./src -c .eslintrc.typescript.json --ext .ts",
     "sandbox": "babel-node -- src/scripts/_sandbox",
     "start": "yarn babel-node src/index.js",
     "test": "jest"
@@ -45,19 +48,25 @@
   "devDependencies": {
     "@babel/cli": "^7.10.5",
     "@babel/core": "^7.8.7",
+    "@babel/eslint-parser": "^7.17.0",
     "@babel/node": "^7.8.7",
     "@babel/plugin-proposal-class-properties": "^7.8.3",
     "@babel/preset-env": "^7.8.7",
     "@babel/register": "^7.8.6",
     "@jest/console": "^25.1.0",
-    "babel-eslint": "^8.2.6",
-    "eslint": "^6.8.0",
-    "eslint-config-airbnb-base": "^14.1.0",
+    "@tsconfig/node16": "^1.0.2",
+    "@typescript-eslint/eslint-plugin": "^5.23.0",
+    "@typescript-eslint/parser": "^5.23.0",
+    "eslint": "^8.15.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-airbnb-typescript": "^17.0.0",
     "eslint-import-resolver-alias": "^1.1.2",
-    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-sort-exports": "^0.6.0",
     "jest": "^25.1.0",
     "nock": "^12.0.2",
-    "rimraf": "^3.0.2"
+    "rimraf": "^3.0.2",
+    "typescript": "^4.6.4"
   },
   "engines": {
     "node": ">=16"

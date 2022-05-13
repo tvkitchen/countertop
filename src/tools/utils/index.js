@@ -10,7 +10,6 @@
  */
 export const methodExists = (methodName, object) => typeof object[methodName] === 'function'
 
-
 /**
  * Checks whether two arrays share any items
  * @param  {Array} arr1 The first array being considered.
