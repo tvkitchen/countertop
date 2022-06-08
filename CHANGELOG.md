@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [0.4.1] - 2022-06-08
 ### Changed
 - Update `@tvkitchen/base-classes` to version `2.0.0-alpha.2` in order to support longer streams.
 
@@ -52,7 +54,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Initial implementation of the `countertop` package.
 
-[Unreleased]: https://github.com/tvkitchen/appliances/compare/@tvkitchen/countertop@0.4.0...HEAD
+[Unreleased]: https://github.com/tvkitchen/appliances/compare/@tvkitchen/countertop@0.4.1...HEAD
+[0.4.1]: https://github.com/tvkitchen/countertop/releases/tag/@tvkitchen/countertop@0.4.1
 [0.4.0]: https://github.com/tvkitchen/countertop/releases/tag/@tvkitchen/countertop@0.4.0
 [0.3.0]: https://github.com/tvkitchen/countertop/releases/tag/@tvkitchen/countertop@0.3.0
 [0.2.1]: https://github.com/tvkitchen/countertop/releases/tag/@tvkitchen/countertop@0.2.1
