@@ -1107,10 +1107,10 @@
   resolved "https://registry.yarnpkg.com/@tsconfig/node16/-/node16-1.0.2.tgz#423c77877d0569db20e1fc80885ac4118314010e"
   integrity sha512-eZxlbI8GZscaGS7kkc/trHTT5xgrjH3/1n2JDwusC9iahPKWMRvRjJSAN5mCXviuTGQ/lHnhvv8Q1YTpnfz9gA==
 
-"@tvkitchen/base-classes@2.0.0-alpha.1":
-  version "2.0.0-alpha.1"
-  resolved "https://registry.yarnpkg.com/@tvkitchen/base-classes/-/base-classes-2.0.0-alpha.1.tgz#a52e7d39ee814c1a9f9293e199f99a93adb4a0c8"
-  integrity sha512-1wENKO3VTnV7BY/OeMGJ7N7gub1zIlQ/AU+MQu9q/73/iNV1sZkCiFKbVXd8lnSd2gwzGio4Eca5vOA2S7Zl8A==
+"@tvkitchen/base-classes@2.0.0-alpha.2":
+  version "2.0.0-alpha.2"
+  resolved "https://registry.yarnpkg.com/@tvkitchen/base-classes/-/base-classes-2.0.0-alpha.2.tgz#5f934d36c10760a5b069978d56844dcbf5e93159"
+  integrity sha512-vYi7vyiNBIRH3gMZrgUjz4kZ+MI1vLTgKNT791Xac1QjBNdy+G0D+xiHcx7wxfqUzPvH6NMzBt/hodMiAnh/Gw==
   dependencies:
     avsc "^5.4.21"
 
