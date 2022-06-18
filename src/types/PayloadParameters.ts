@@ -8,12 +8,13 @@ export interface PayloadParameters {
 	duration: number;
 	position: number;
 }
-export const isPayloadParameters = (value: unknown): value is PayloadParameters => (
-	value instanceof Object
-	&& (value as PayloadParameters).data instanceof Buffer
-	&& typeof (value as PayloadParameters).type === 'string'
-	&& typeof (value as PayloadParameters).createdAt === 'string'
-	&& typeof (value as PayloadParameters).origin === 'string'
-	&& typeof (value as PayloadParameters).duration === 'number'
-	&& typeof (value as PayloadParameters).position === 'number'
-)
+export const isPayloadParameters = (value: unknown): value is PayloadParameters => {
+	const candidate = value as PayloadParameters
+	return candidate instanceof Object
+		&& candidate.data instanceof Buffer
+		&& typeof candidate.type === 'string'
+		&& typeof candidate.createdAt === 'string'
+		&& typeof candidate.origin === 'string'
+		&& typeof candidate.duration === 'number'
+		&& typeof candidate.position === 'number'
+}
