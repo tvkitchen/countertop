@@ -7,6 +7,8 @@ import {
 	generateTributaryMaps,
 	getStreamOutputMap,
 	getSourceStations,
+	identifyObsoleteStreams,
+	pruneStreams,
 } from '../tools/utils/countertop'
 
 /**
@@ -89,11 +91,19 @@ class CountertopTopology {
 				// Remove any new streams that aren't long enough
 				.filter((stream) => stream.getLength() === extentionLength)
 		}
+		// Prune any past streams whose tributaries are explicit subsets of new streams
+		const obsoleteStreams = identifyObsoleteStreams(streams, nextStreams)
+		const prunedStreams = pruneStreams(streams, obsoleteStreams)
+		const prunedNextStreams = pruneStreams(nextStreams, obsoleteStreams)
+
 		// If there were any new streams, iterate again
-		if (nextStreams.length !== 0) {
-			return CountertopTopology.generateStreams(stations, streams.concat(nextStreams))
+		if (prunedNextStreams.length !== 0) {
+			return CountertopTopology.generateStreams(
+				stations,
+				prunedStreams.concat(prunedNextStreams),
+			)
 		}
-		return streams
+		return prunedStreams
 	}
 
 	/**

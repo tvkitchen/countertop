@@ -13,6 +13,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - The `Payload` class now supports serialization and deserialization to bytes / Buffer.
 - The `PayloadArray` class is now part of the countertop. It has a slightly modified API.
 
+### Fixed
+- Countertop topologies will no longer create redundant streams containing partially complete tributary sets when a more complete tributary superset is available for a given station.
+
 ## [0.4.1] - 2022-06-08
 ### Changed
 - Update `@tvkitchen/base-classes` to version `2.0.0-alpha.2` in order to support longer streams.
