@@ -1,2 +1,2 @@
-export { DataType } from './DataType'
 export { LogLevel } from './LogLevel'
+export { PayloadType } from './PayloadType'
