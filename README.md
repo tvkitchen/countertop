@@ -1,5 +1,6 @@
-[![Build Status](https://travis-ci.com/tvkitchen/countertop.svg?branch=main)](https://travis-ci.com/tvkitchen/countertop)
-[![codecov](https://codecov.io/gh/tvkitchen/countertop/branch/master/graph/badge.svg?token=WAbcqJJL9g)](https://codecov.io/gh/tvkitchen/countertop)
+![lint](https://github.com/tvkitchen/base/actions/workflows/lint.yml/badge.svg)
+![test](https://github.com/tvkitchen/base/actions/workflows/test.yml/badge.svg)
+[![codecov](https://codecov.io/gh/tvkitchen/countertop/branch/main/graph/badge.svg?token=WAbcqJJL9g)](https://codecov.io/gh/tvkitchen/countertop)
 
 # TV Kitchen Countertop
 
