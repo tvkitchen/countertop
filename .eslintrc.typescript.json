@@ -18,12 +18,19 @@
     "import/prefer-default-export": "off",
     "import/no-default-export":  "error",
     "@typescript-eslint/prefer-readonly-parameter-types": "off",
-    "sort-exports/sort-exports": ["error", { "sortDir": "asc" }],
     "import/order": ["error", {
       "groups": ["builtin", "external", "internal", "parent", "sibling", "index", "object", "type"],
       "newlines-between": "never"
     }]
   },
+  "overrides": [
+    {
+      "files": [ "**/index.ts" ],
+      "rules": {
+        "sort-exports/sort-exports": ["error", { "sortDir": "asc" }]
+      }
+    }
+  ],
   "env": {
     "es6": true,
     "node": true,
