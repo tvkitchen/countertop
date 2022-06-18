@@ -7,7 +7,7 @@
     "clean": "rimraf dist",
     "build": "yarn clean && yarn build:typescript && yarn build:transpile",
     "build:transpile": "yarn run babel src -d dist",
-    "build:typescript": "tsc -p tsconfig.node.json",
+    "build:typescript": "tsc -p tsconfig.json",
     "lint": "yarn lint:node && yarn lint:typescript",
     "lint:node": "eslint 'src/**/*.js'",
     "lint:typescript": "eslint ./src -c .eslintrc.typescript.json --ext .ts",
