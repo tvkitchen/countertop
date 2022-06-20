@@ -1,3 +1,4 @@
+import { ValidationError } from '../../errors'
 import { Payload } from '../Payload'
 
 describe('Payload', () => {
@@ -71,10 +72,10 @@ describe('Payload', () => {
 
 	describe('deserialize', () => {
 		it('should error when deserializing an empty serialized object', () => {
-			expect(() => Payload.deserialize('{}')).toThrow()
+			expect(() => Payload.deserialize('{}')).toThrow(ValidationError)
 		})
 		it('should error when deserializeing a partially populated serialized payload', () => {
-			expect(() => Payload.deserialize('{"type":"WHOOPS"}')).toThrow()
+			expect(() => Payload.deserialize('{"type":"WHOOPS"}')).toThrow(ValidationError)
 		})
 		it('should properly deserialize a serialized payload', () => {
 			const parameters = {
@@ -100,7 +101,7 @@ describe('Payload', () => {
 				position: 60000,
 			}
 			const serializedValues = JSON.stringify(parameters)
-			expect(() => Payload.deserialize(serializedValues)).toThrow()
+			expect(() => Payload.deserialize(serializedValues)).toThrow(ValidationError)
 		})
 	})
 })
