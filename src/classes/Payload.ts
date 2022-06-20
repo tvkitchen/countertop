@@ -1,4 +1,7 @@
+import { ajv } from '../tools/ajv'
 import { isPayloadParameters } from '../types'
+import { ValidationError } from '../errors'
+import type { JSONSchemaType } from 'ajv'
 import type {
 	PayloadParameters,
 	PayloadType,
@@ -6,13 +9,28 @@ import type {
 
 interface JsonDeserializedBuffer {
 	type: string;
-	data: string;
+	data: number[];
 }
-const isJsonDeserializedBuffer = (value: unknown): value is JsonDeserializedBuffer => (
-	value instanceof Object
-	&& 'type' in value
-	&& 'data' in value
-)
+const jsonDeserializedBufferSchema: JSONSchemaType<JsonDeserializedBuffer> = {
+	type: 'object',
+	properties: {
+		type: {
+			type: 'string',
+			pattern: 'Buffer',
+		},
+		data: {
+			type: 'array',
+			items: {
+				type: 'integer',
+			},
+		},
+	},
+	required: [
+		'type',
+		'data',
+	],
+}
+const isJsonDeserializedBuffer = ajv.compile(jsonDeserializedBufferSchema)
 
 export class Payload {
 	public readonly data: Buffer
@@ -42,8 +60,7 @@ export class Payload {
 
 	public static deserialize(serializedPayload: string): Payload {
 		const deserializedPayload: unknown = JSON.parse(serializedPayload, (_, value: unknown) => {
-			if (isJsonDeserializedBuffer(value)
-				&& value.type === 'Buffer') {
+			if (isJsonDeserializedBuffer(value)) {
 				return Buffer.from(value.data)
 			}
 			return value
@@ -51,6 +68,10 @@ export class Payload {
 		if (isPayloadParameters(deserializedPayload)) {
 			return new Payload(deserializedPayload)
 		}
-		throw new Error(`Invalid payload serialiation: ${serializedPayload}`)
+
+		throw new ValidationError(
+			'Invalid payload serialiation',
+			isPayloadParameters.errors,
+		)
 	}
 }

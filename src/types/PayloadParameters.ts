@@ -1,3 +1,5 @@
+import { ajv } from '../tools/ajv'
+import type { JSONSchemaType } from 'ajv'
 import type { PayloadType } from './PayloadType'
 
 export interface PayloadParameters {
@@ -8,12 +10,40 @@ export interface PayloadParameters {
 	duration: number;
 	position: number;
 }
-export const isPayloadParameters = (value: unknown): value is PayloadParameters => (
-	value instanceof Object
-	&& (value as PayloadParameters).data instanceof Buffer
-	&& typeof (value as PayloadParameters).type === 'string'
-	&& typeof (value as PayloadParameters).createdAt === 'string'
-	&& typeof (value as PayloadParameters).origin === 'string'
-	&& typeof (value as PayloadParameters).duration === 'number'
-	&& typeof (value as PayloadParameters).position === 'number'
-)
+
+export const payloadParametersSchema: JSONSchemaType<PayloadParameters> = {
+	type: 'object',
+	properties: {
+		data: {
+			type: 'object',
+			required: [],
+			instanceof: 'Buffer',
+		},
+		type: {
+			type: 'string',
+		},
+		createdAt: {
+			type: 'string',
+			nullable: true,
+		},
+		origin: {
+			type: 'string',
+		},
+		duration: {
+			type: 'integer',
+		},
+		position: {
+			type: 'integer',
+		},
+	},
+	required: [
+		'data',
+		'type',
+		'origin',
+		'duration',
+		'position',
+	],
+	additionalProperties: false,
+}
+
+export const isPayloadParameters = ajv.compile(payloadParametersSchema)
