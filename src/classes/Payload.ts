@@ -68,9 +68,8 @@ export class Payload {
 		if (isPayloadParameters(deserializedPayload)) {
 			return new Payload(deserializedPayload)
 		}
-
 		throw new ValidationError(
-			'Invalid payload serialiation',
+			'Invalid payload serialization',
 			isPayloadParameters.errors,
 		)
 	}
