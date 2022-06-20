@@ -40,11 +40,16 @@ describe('Payload', () => {
 				duration: 1000,
 				position: 60000,
 			}
-			jest.setSystemTime(new Date('1592156234000'))
+			const firstTime = new Date(1592156234000)
+			const secondTime = new Date(1592156235000)
+			jest.useFakeTimers()
+			jest.setSystemTime(firstTime)
 			const firstPayload = new Payload(parameters)
-			jest.setSystemTime(new Date('1592156235000'))
+			jest.setSystemTime(secondTime)
 			const secondPayload = new Payload(parameters)
-			expect(firstPayload.createdAt).not.toEqual(secondPayload.createdAt)
+			jest.useRealTimers()
+			expect(firstPayload.createdAt).toEqual(firstTime.toISOString())
+			expect(secondPayload.createdAt).toEqual(secondTime.toISOString())
 		})
 	})
 
