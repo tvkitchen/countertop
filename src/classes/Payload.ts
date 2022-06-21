@@ -1,3 +1,4 @@
+import avro from 'avsc'
 import { ajv } from '../tools/ajv'
 import { isPayloadParameters } from '../types'
 import { ValidationError } from '../errors'
@@ -33,6 +34,37 @@ const jsonDeserializedBufferSchema: JSONSchemaType<JsonDeserializedBuffer> = {
 const isJsonDeserializedBuffer = ajv.compile(jsonDeserializedBufferSchema)
 
 export class Payload {
+	private static readonly avroType = avro.Type.forSchema({
+		name: 'Payload',
+		type: 'record',
+		fields: [
+			{
+				name: 'data',
+				type: 'bytes',
+			},
+			{
+				name: 'type',
+				type: 'string',
+			},
+			{
+				name: 'createdAt',
+				type: 'string',
+			},
+			{
+				name: 'origin',
+				type: 'string',
+			},
+			{
+				name: 'duration',
+				type: 'long',
+			},
+			{
+				name: 'position',
+				type: 'long',
+			},
+		],
+	})
+
 	public readonly data: Buffer
 
 	public readonly type: PayloadType | string
@@ -72,5 +104,23 @@ export class Payload {
 			'Invalid payload serialization',
 			isPayloadParameters.errors,
 		)
+	}
+
+	public static getAvroType(): avro.Type {
+		return Payload.avroType
+	}
+
+	public static byteSerialize(payload: Payload): Buffer {
+		return Payload.getAvroType().toBuffer(payload)
+	}
+
+	public static byteDeserialize(serializedPayload: Buffer): Payload {
+		const deserializedPayload: unknown = Payload.getAvroType().fromBuffer(
+			serializedPayload,
+		)
+		if (isPayloadParameters(deserializedPayload)) {
+			return new Payload(deserializedPayload)
+		}
+		throw new Error('TV Kitchen defined a Avro Type which deserialized to an invalid Payload.')
 	}
 }

@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - The `Payload` class is now part of the countertop.  This will replace the `@tvkitchen/base-classes` version of Payload.
 - TypeScript definitions related to `Payload`, `PayloadType`, and `PayloadParameters` are also exported.
 - New `ValidationError` error.
+- The `Payload` class now supports serialization and deserialization to bytes / Buffer.
 
 ## [0.4.1] - 2022-06-08
 ### Changed

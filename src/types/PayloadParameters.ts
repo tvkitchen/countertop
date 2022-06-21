@@ -43,7 +43,6 @@ export const payloadParametersSchema: JSONSchemaType<PayloadParameters> = {
 		'duration',
 		'position',
 	],
-	additionalProperties: false,
 }
 
 export const isPayloadParameters = ajv.compile(payloadParametersSchema)
