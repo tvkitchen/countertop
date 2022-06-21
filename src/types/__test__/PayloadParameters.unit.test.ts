@@ -29,17 +29,6 @@ describe('isPayloadParameters', () => {
 			position: 60000,
 		})).toEqual(false)
 	})
-	it('should return false for overly populated payload parameters', () => {
-		expect(isPayloadParameters({
-			data: Buffer.from('I ate all of the cheese'),
-			type: 'CONFESSION',
-			createdAt: '2020-02-02T03:04:05.000Z',
-			origin: '2020-02-02T03:04:01.000Z',
-			duration: 1000,
-			position: 60000,
-			notReallyUsed: 42,
-		})).toEqual(false)
-	})
 	it('should return false for incorrectly typed payload parameters', () => {
 		expect(isPayloadParameters({
 			data: 'this is not a buffer',

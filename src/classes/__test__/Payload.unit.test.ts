@@ -1,3 +1,4 @@
+import avro from 'avsc'
 import { ValidationError } from '../../errors'
 import { Payload } from '../Payload'
 
@@ -102,6 +103,60 @@ describe('Payload', () => {
 			}
 			const serializedValues = JSON.stringify(parameters)
 			expect(() => Payload.deserialize(serializedValues)).toThrow(ValidationError)
+		})
+	})
+
+	describe('byteSerialize', () => {
+		it('should properly should serialize data with a fully populated object', () => {
+			const parameters = {
+				data: Buffer.from('I ate all of the cheese'),
+				type: 'CONFESSION',
+				createdAt: '2020-02-02T03:04:05.000Z',
+				origin: '2020-02-02T03:04:01.000Z',
+				duration: 1000,
+				position: 60000,
+			}
+			const payload = new Payload(parameters)
+			const serializedPayload = Payload.byteSerialize(payload)
+			expect(serializedPayload).toMatchSnapshot()
+		})
+	})
+
+	describe('byteDeserialize', () => {
+		it('should properly deserialize a serialized payload', () => {
+			const parameters = {
+				data: Buffer.from('I ate all of the cheese'),
+				type: 'CONFESSION',
+				createdAt: '2020-02-02T03:04:05.000Z',
+				origin: '2020-02-02T03:04:01.000Z',
+				duration: 1000,
+				position: 60000,
+			}
+			const payload = new Payload(parameters)
+			const serializedPayload = Payload.byteSerialize(payload)
+			const deserializedPayload = Payload.byteDeserialize(serializedPayload)
+			expect(deserializedPayload).toEqual(payload)
+		})
+		it('should error when deserializing an invalid buffer', () => {
+			expect(() => Payload.byteDeserialize(Buffer.from(''))).toThrow()
+		})
+		it('should error when the Avro type does not translate to a valid payload', () => {
+			const incompleteAvroType = avro.Type.forSchema({
+				name: 'IncompletePayload',
+				type: 'record',
+				fields: [
+					{
+						name: 'completelyMadeUp',
+						type: ['string'],
+					},
+				],
+			})
+			const serializedObject = incompleteAvroType.toBuffer({
+				completelyMadeUp: 'This is a string',
+			})
+			const spy = jest.spyOn(Payload, 'getAvroType').mockImplementation(() => incompleteAvroType)
+			expect(() => Payload.byteDeserialize(serializedObject)).toThrow(Error)
+			spy.mockRestore()
 		})
 	})
 })
