@@ -14,7 +14,7 @@
     "sandbox": "babel-node -- src/scripts/_sandbox",
     "start": "yarn babel-node src/index.js",
     "test": "yarn test:js && yarn test:ts",
-    "test:js": "jest",
+    "test:js": "jest --config jest.config.js",
     "test:ts": "jest --config jest.ts.config.js"
   },
   "repository": {
