@@ -10,11 +10,13 @@
   ],
   "extends": [
     "plugin:@typescript-eslint/all",
+    "airbnb-base",
     "airbnb-typescript/base"
   ],
   "rules": {
     "@typescript-eslint/semi": ["error", "never"],
     "@typescript-eslint/indent": ["error", "tab"],
+    "no-tabs": "off",
     "import/prefer-default-export": "off",
     "import/no-default-export":  "error",
     "@typescript-eslint/prefer-readonly-parameter-types": "off",
