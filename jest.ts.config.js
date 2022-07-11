@@ -9,7 +9,7 @@ module.exports = {
 	testPathIgnorePatterns: [
 		"<rootDir>/dist/",
 		"<rootDir>/node_modules/",
-		"<rootDir>/src/.*\.js",
+		"<rootDir>/src/.*\\.js",
 	],
 	collectCoverageFrom: ["src/**/*.ts"],
 	silent: true,
