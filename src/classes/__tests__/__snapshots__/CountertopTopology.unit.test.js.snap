@@ -31,6 +31,120 @@ Array [
 ]
 `;
 
+exports[`CountertopTopology #unit generateStreams Should maintain complete toplogies after redundant partial streams are removed 1`] = `
+Array [
+  Object {
+    "mouth": 0,
+    "source": 0,
+    "tributaryMap": Map {},
+  },
+  Object {
+    "mouth": 1,
+    "source": 0,
+    "tributaryMap": Map {
+      "foo" => Object {
+        "mouth": 0,
+        "source": 0,
+        "tributaryMap": Map {},
+      },
+    },
+  },
+  Object {
+    "mouth": 2,
+    "source": 0,
+    "tributaryMap": Map {
+      "foo" => Object {
+        "mouth": 0,
+        "source": 0,
+        "tributaryMap": Map {},
+      },
+      "bar" => Object {
+        "mouth": 1,
+        "source": 0,
+        "tributaryMap": Map {
+          "foo" => Object {
+            "mouth": 0,
+            "source": 0,
+            "tributaryMap": Map {},
+          },
+        },
+      },
+    },
+  },
+  Object {
+    "mouth": 3,
+    "source": 0,
+    "tributaryMap": Map {
+      "baz" => Object {
+        "mouth": 2,
+        "source": 0,
+        "tributaryMap": Map {
+          "foo" => Object {
+            "mouth": 0,
+            "source": 0,
+            "tributaryMap": Map {},
+          },
+          "bar" => Object {
+            "mouth": 1,
+            "source": 0,
+            "tributaryMap": Map {
+              "foo" => Object {
+                "mouth": 0,
+                "source": 0,
+                "tributaryMap": Map {},
+              },
+            },
+          },
+        },
+      },
+    },
+  },
+]
+`;
+
+exports[`CountertopTopology #unit generateStreams Should not generate redundant partial streams for stations with multiple inputs 1`] = `
+Array [
+  Object {
+    "mouth": 0,
+    "source": 0,
+    "tributaryMap": Map {},
+  },
+  Object {
+    "mouth": 1,
+    "source": 0,
+    "tributaryMap": Map {
+      "foo" => Object {
+        "mouth": 0,
+        "source": 0,
+        "tributaryMap": Map {},
+      },
+    },
+  },
+  Object {
+    "mouth": 2,
+    "source": 0,
+    "tributaryMap": Map {
+      "foo" => Object {
+        "mouth": 0,
+        "source": 0,
+        "tributaryMap": Map {},
+      },
+      "bar" => Object {
+        "mouth": 1,
+        "source": 0,
+        "tributaryMap": Map {
+          "foo" => Object {
+            "mouth": 0,
+            "source": 0,
+            "tributaryMap": Map {},
+          },
+        },
+      },
+    },
+  },
+]
+`;
+
 exports[`CountertopTopology #unit generateStreams Should not generate streams for stations with no inputs 1`] = `
 Array [
   Object {

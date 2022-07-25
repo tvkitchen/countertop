@@ -75,6 +75,16 @@ export const filterStreamsContainingStation = (streams, station) => streams
 	.filter((stream) => !stream.includesStation(station))
 
 /**
+ * Returns a subset of streams that do not contain a given stream.
+ * Note that this will also filter the stream itself.
+ * @param {CountertopStream[]} streams
+ * @param {CountertopStream} filteredStream
+ * @returns {CountertopStream[]}
+ */
+export const filterStreamsContainingStream = (streams, filteredStream) => streams
+	.filter((stream) => !stream.includesStream(filteredStream) && stream !== filteredStream)
+
+/**
  * Generates a Map of type / stream[] pairs based on streams who output the types.
  *
  * @param  {CountertopStream[]} streams The CountertopStreams being mapped.
@@ -168,3 +178,35 @@ export const generateTributaryMaps = (station, streamOutputMap) => {
  * @return {String}                    The resulting kafka topic.
  */
 export const getStreamTopic = (dataType, stream) => sanitizeTopic(`${dataType}::${stream.id}`)
+
+const isSubsetOf = (arr1, arr2) => arr1.every((value) => arr2.includes(value))
+
+/**
+ * Returns any streams with the same station whose mouth + source is the same and whose
+ * tributaries are a direct subset (or equal set).
+ *
+ * @param  {CountertopStream[]} currentStreams The base set of streams.
+ * @param  {CountertopStream[]} nextStreams    The new streams to use to determine pruning.
+ * @return {CountertopStream[]}                The pruned subset of the currentStreams
+ */
+export const identifyObsoleteStreams = (currentStreams, nextStreams) => (
+	currentStreams.filter(
+		(currentStream) => nextStreams.some(
+			(nextStream) => (
+				currentStream.mouth.id === nextStream.mouth.id
+				&& currentStream.source.id === nextStream.source.id
+				&& isSubsetOf(currentStream.getTributaryArray(), nextStream.getTributaryArray())
+			),
+		),
+	)
+)
+
+export const pruneStreams = (currentStreams, removedStreams) => (
+	removedStreams.reduce(
+		(remainingStreams, removedStream) => filterStreamsContainingStream(
+			remainingStreams,
+			removedStream,
+		),
+		currentStreams,
+	)
+)

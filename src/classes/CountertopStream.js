@@ -93,6 +93,15 @@ class CountertopStream {
 		|| this.getTributaryArray().some((tributary) => tributary.includesStation(station))
 
 	/**
+	 * Checks if a given stream exists at any point within the stream.
+	 *
+	 * @param  {CountertopStream} stream The stream being searched for.
+	 * @return {Boolean}                   The result of the search.
+	 */
+	includesStream = (stream) => this.getTributaryArray().includes(stream)
+		|| this.getTributaryArray().some((tributary) => tributary.includesStream(stream))
+
+	/**
 	 * Get the output types produced by this stream.
 	 *
 	 * @return {String[]} The output types.
