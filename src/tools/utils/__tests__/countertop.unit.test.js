@@ -1,8 +1,6 @@
 import { by } from '..'
-import {
-	CountertopStation,
-	CountertopStream,
-} from '../../../classes'
+import CountertopStation from '../../../classes/CountertopStation'
+import CountertopStream from '../../../classes/CountertopStream'
 import {
 	generateMockAppliance,
 	normalizeTributaryMaps,

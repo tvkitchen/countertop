@@ -32,6 +32,7 @@ export const generateMockAppliance = ({
 
 		static getOutputTypes = getOutputTypes
 
+		// eslint-disable-next-line class-methods-use-this
 		on = () => true
 
 		audit = audit

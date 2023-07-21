@@ -1,8 +1,6 @@
 import { IAppliance } from '@tvkitchen/base-interfaces'
-import {
-	CountertopStation,
-	CountertopStream,
-} from '../../../classes'
+import CountertopStation from '../../../classes/CountertopStation'
+import CountertopStream from '../../../classes/CountertopStream'
 import {
 	loadTestData,
 	generateMockAppliance,

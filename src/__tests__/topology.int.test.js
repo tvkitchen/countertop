@@ -1,5 +1,5 @@
 import { dataTypes } from '@tvkitchen/base-constants'
-import { Countertop } from '..'
+import Countertop from '../classes/Countertop'
 import {
 	generateMockAppliance,
 	normalizeStreams,
