@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - The `Payload` class now supports serialization and deserialization to bytes / Buffer.
 - The `PayloadArray` class is now part of the countertop. It has a slightly modified API.
 - The `AbstractAppliance` abstract class is now part of the countertop. It has a modified API.
+- `CountertopWorker` now has type definitions.
 
 ## [0.4.2] - 2022-07-25
 ### Fixed
