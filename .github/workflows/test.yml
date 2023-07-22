@@ -20,8 +20,8 @@ jobs:
     - run: yarn test:js --coverage
     - uses: codecov/codecov-action@v3
       with:
-        flags: -cF javascript
+        flags: javascript
     - run: yarn test:ts --coverage
     - uses: codecov/codecov-action@v3
       with:
-        flags: -cF typescript
+        flags: typescript
