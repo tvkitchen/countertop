@@ -27,3 +27,5 @@ export const arraysHaveOverlap = (arr1, arr2) => arr1.some(
  * @return {Function}           The sort comparison function.
  */
 export const by = (attribute) => (a, b) => ((a[attribute] > b[attribute]) ? 1 : -1)
+
+export * from './sortedArray'

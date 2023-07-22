@@ -1,6 +1,7 @@
 {
   "extends": "@tsconfig/node16/tsconfig.json",
   "compilerOptions": {
+    "allowJs": true,
     "module": "commonjs",
     "outDir": "dist",
     "declaration": true
