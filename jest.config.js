@@ -6,6 +6,9 @@ module.exports = {
 	],
 	testRegex: '(/__tests__/.*)(test|spec)\\.jsx?$',
 	collectCoverageFrom: ["src/**/*.js"],
-	coveragePathIgnorePatterns: ['__tests__'],
+	coveragePathIgnorePatterns: [
+		'__tests__',
+		'/src/test/'
+	],
 	silent: true,
 }

@@ -13,7 +13,10 @@ module.exports = {
 	],
 	testRegex: '(/__tests__/.*)(test|spec)\\.tsx?$',
 	collectCoverageFrom: ["src/**/*.ts"],
-	coveragePathIgnorePatterns: ['__tests__'],
+	coveragePathIgnorePatterns: [
+		'__tests__',
+		'/src/test/'
+	],
 	silent: true,
 	passWithNoTests: true,
 };

@@ -52,7 +52,7 @@ export class Payload {
 			},
 			{
 				name: 'origin',
-				type: 'string',
+				type: ['string', 'null'],
 			},
 			{
 				name: 'duration',
@@ -71,7 +71,7 @@ export class Payload {
 
 	public readonly createdAt: string
 
-	public readonly origin: string
+	public readonly origin: string | undefined
 
 	public readonly duration: number
 

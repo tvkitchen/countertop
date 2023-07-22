@@ -6,7 +6,7 @@ export interface PayloadParameters {
 	data: Buffer;
 	type: PayloadType | string;
 	createdAt?: string;
-	origin: string;
+	origin?: string;
 	duration: number;
 	position: number;
 }
@@ -28,6 +28,7 @@ export const payloadParametersSchema: JSONSchemaType<PayloadParameters> = {
 		},
 		origin: {
 			type: 'string',
+			nullable: true,
 		},
 		duration: {
 			type: 'integer',
@@ -39,7 +40,6 @@ export const payloadParametersSchema: JSONSchemaType<PayloadParameters> = {
 	required: [
 		'data',
 		'type',
-		'origin',
 		'duration',
 		'position',
 	],

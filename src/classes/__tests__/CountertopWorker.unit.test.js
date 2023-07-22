@@ -30,7 +30,7 @@ describe('CountertopWorker #unit', () => {
 			const Appliance = generateMockAppliance({
 				inputTypes: [],
 				outputTypes: ['foo'],
-				audit: async () => false,
+				healthCheck: async () => false,
 			})
 			const station = new CountertopStation(Appliance)
 			const stream = new CountertopStream(station)
