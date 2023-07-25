@@ -87,9 +87,9 @@ export const normalizeTributaryMaps = (streamMaps, stations) => streamMaps.map(
  * @return {CountertopStream}             The normalized stream.
  */
 export const normalizeStream = (stream, stations) => ({
-	source: stations.findIndex((station) => station.id === stream.getSource().id),
-	mouth: stations.findIndex((station) => station.id === stream.getMouth().id),
-	tributaryMap: normalizeTributaryMap(stream.getTributaryMap(), stations),
+	source: stations.findIndex((station) => station.id === stream.source.id),
+	mouth: stations.findIndex((station) => station.id === stream.mouth.id),
+	tributaryMap: normalizeTributaryMap(stream.tributaries, stations),
 })
 
 /**

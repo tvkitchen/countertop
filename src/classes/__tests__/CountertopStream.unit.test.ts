@@ -1,9 +1,7 @@
 import assert from 'assert'
-import CountertopStream from '../CountertopStream'
+import { CountertopStream } from '../CountertopStream'
 import CountertopStation from '../CountertopStation'
-import {
-	generateMockAppliance,
-} from '../../tools/utils/jest'
+import { generateMockAppliance } from '../../tools/test'
 
 describe('CountertopStream #unit', () => {
 	describe('constructor', () => {
@@ -37,15 +35,15 @@ describe('CountertopStream #unit', () => {
 		})
 	})
 
-	describe('getSource', () => {
-		it('Should return the core station if it is a source station', () => {
+	describe('source', () => {
+		it('Should be the core station if it is a source station', () => {
 			const Appliance = generateMockAppliance({
 				inputTypes: [],
 				outputTypes: [],
 			})
 			const station = new CountertopStation(Appliance)
 			const stream = new CountertopStream(station)
-			expect(stream.getSource()).toBe(station)
+			expect(stream.source).toBe(station)
 		})
 
 		it('Should return the source station', () => {
@@ -64,24 +62,24 @@ describe('CountertopStream #unit', () => {
 				stationB,
 				new Map([['foo', streamA]]),
 			)
-			expect(streamB.getSource()).toBe(stationA)
+			expect(streamB.source).toBe(stationA)
 		})
 	})
 
-	describe('getMouth', () => {
-		it('Should return the core station', () => {
+	describe('mouth', () => {
+		it('Should be the core station', () => {
 			const Appliance = generateMockAppliance({
 				inputTypes: [],
 				outputTypes: [],
 			})
 			const station = new CountertopStation(Appliance)
 			const stream = new CountertopStream(station)
-			expect(stream.getMouth()).toBe(station)
+			expect(stream.mouth).toBe(station)
 		})
 	})
 
-	describe('getTributaryMap', () => {
-		it('Should return a tributary map', () => {
+	describe('tributaries', () => {
+		it('Should match the provided tributaries', () => {
 			const ApplianceA = generateMockAppliance({
 				inputTypes: [],
 				outputTypes: ['foo'],
@@ -97,7 +95,7 @@ describe('CountertopStream #unit', () => {
 				stationB,
 				new Map([['foo', streamA]]),
 			)
-			const tributaryMap = streamB.getTributaryMap()
+			const tributaryMap = streamB.tributaries
 			expect(tributaryMap.get('foo')).toBe(streamA)
 		})
 	})
@@ -192,6 +190,52 @@ describe('CountertopStream #unit', () => {
 		})
 	})
 
+	describe('includesStream', () => {
+		it('should return true if a stream is a tributary', () => {
+			const ApplianceA = generateMockAppliance({
+				inputTypes: [],
+				outputTypes: ['foo'],
+			})
+			const ApplianceB = generateMockAppliance({
+				inputTypes: ['foo'],
+				outputTypes: ['bar'],
+			})
+			const stationA = new CountertopStation(ApplianceA)
+			const stationB = new CountertopStation(ApplianceB)
+			const streamA = new CountertopStream(stationA)
+			const streamB = new CountertopStream(
+				stationB,
+				new Map([['foo', streamA]]),
+			)
+			expect(streamB.includesStream(streamA)).toBe(true)
+		})
+
+		it('should return false if a stream is not a tributary or sub-tributary', () => {
+			const ApplianceA = generateMockAppliance({
+				inputTypes: [],
+				outputTypes: ['foo'],
+			})
+			const ApplianceB = generateMockAppliance({
+				inputTypes: ['foo'],
+				outputTypes: ['bar'],
+			})
+			const ApplianceC = generateMockAppliance({
+				inputTypes: [],
+				outputTypes: ['bar'],
+			})
+			const stationA = new CountertopStation(ApplianceA)
+			const stationB = new CountertopStation(ApplianceB)
+			const stationC = new CountertopStation(ApplianceC)
+			const streamA = new CountertopStream(stationA)
+			const streamB = new CountertopStream(
+				stationB,
+				new Map([['foo', streamA]]),
+			)
+			const streamC = new CountertopStream(stationC)
+			expect(streamB.includesStream(streamC)).toBe(false)
+		})
+	})
+
 	describe('getOutputTypes', () => {
 		it('Should return the output types of the mouth station', () => {
 			const ApplianceA = generateMockAppliance({
@@ -209,7 +253,7 @@ describe('CountertopStream #unit', () => {
 				stationB,
 				new Map([['foo', streamA]]),
 			)
-			expect(streamB.getOutputTypes(stationA)).toEqual(['bar', 'baz'])
+			expect(streamB.getOutputTypes()).toEqual(['bar', 'baz'])
 		})
 	})
 })

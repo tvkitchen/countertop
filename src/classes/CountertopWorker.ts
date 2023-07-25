@@ -14,10 +14,11 @@ import type {
 	ImplementedApplianceClass,
 	ApplianceSettings,
 } from './AbstractAppliance'
+import type { CountertopStream } from './CountertopStream'
 import type { Logger } from '../types'
 
 interface CountertopWorkerSettings {
-	stream: any;
+	stream: CountertopStream;
 	logger?: Logger;
 	kafka: Kafka;
 }
@@ -103,16 +104,14 @@ export class CountertopWorker {
 			this.#appliance.settings,
 		).map(
 			(inputType) => {
-				// TODO: stream has no type definition yet; once it does, we need to update this.
-				// eslint-disable-next-line
-				const inputStream = this.settings.stream.getTributaryMap().get(inputType)
-				if (inputStream) {
-					return getStreamTopic(
-						inputType,
-						inputStream,
-					)
+				const inputStream = this.settings.stream.tributaries.get(inputType)
+				if (inputStream === undefined) {
+					return null
 				}
-				return null
+				return getStreamTopic(
+					inputType,
+					inputStream,
+				)
 			},
 		).filter(
 			(topic: string | null): topic is string => topic !== null,

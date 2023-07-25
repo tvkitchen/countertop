@@ -109,7 +109,7 @@ export const getStreamOutputMap = (streams) => new Map(
  */
 export const getSourcesFromStreams = (streams) => [...new Set(
 	streams.map(
-		(stream) => stream.getSource(),
+		(stream) => stream.source,
 	),
 )]
 
@@ -128,7 +128,7 @@ export const getStreamsFromStreamMap = (streamMap) => [
  *
  * This will return exactly one copy of any source represented in those streams.
  *
- * @param  {Map<CountetopStream[]>} streamMap A Map containing streams
+ * @param  {Map<string, CountertopStream[]>} streamMap A Map containing streams
  * @return {CountertopStation[]}              An array of distinct sources for the streams.
  */
 export const getSourcesFromStreamMap = (streamMap) => getSourcesFromStreams(
@@ -142,9 +142,10 @@ export const getSourcesFromStreamMap = (streamMap) => getSourcesFromStreams(
  * This will not return incomplete tributary maps (i.e. tributary maps will have exactly one stream
  * per input).
  *
- * @param  {CountertopStation}       station         The station whose tributaries are being mapped.
- * @param  {Map<CountertopStream[]>} streamOutputMap A map of of streams grouped by output type.
- * @return {Map<CountertopStream>[]}                 A map of tributary streams for a set of inputs.
+ * @param  {CountertopStation} station The station whose tributaries are being mapped.
+ * @param  {Map<string, CountertopStream[]>} streamOutputMap A map of of streams grouped by
+*																														 output type.
+ * @return {Map<string, CountertopStream>[]} A map of tributary streams for a set of inputs.
  */
 export const generateTributaryMaps = (station, streamOutputMap) => {
 	const sources = getSourcesFromStreamMap(streamOutputMap)
@@ -154,7 +155,7 @@ export const generateTributaryMaps = (station, streamOutputMap) => {
 		(accumulator, type) => accumulator.flatMap(
 			(tributarySet) => {
 				const expandedTributarySets = (streamOutputMap.get(type) || [])
-					.filter((stream) => stream.getSource() === tributarySet.get('source'))
+					.filter((stream) => stream.source === tributarySet.get('source'))
 					.map((stream) => tributarySet.set(type, stream))
 				return (expandedTributarySets.length > 0)
 					? expandedTributarySets
