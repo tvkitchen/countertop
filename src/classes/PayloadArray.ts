@@ -99,7 +99,7 @@ export class PayloadArray {
 	/**
 	 * Get the origin timestamp of this PayloadArray.
 	 */
-	public getOrigin(): string {
+	public getOrigin(): string | undefined {
 		return this.payloads[0].origin
 	}
 

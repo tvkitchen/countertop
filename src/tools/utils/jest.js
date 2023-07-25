@@ -23,7 +23,7 @@ export const generateMockAppliance = ({
 	outputTypes,
 	getInputTypes = () => inputTypes,
 	getOutputTypes = () => outputTypes,
-	audit = async () => true,
+	healthCheck = async () => true,
 	start = async () => true,
 	stop = async () => true,
 }) => {
@@ -34,7 +34,7 @@ export const generateMockAppliance = ({
 
 		on = () => true
 
-		audit = audit
+		healthCheck = healthCheck
 
 		start = start
 

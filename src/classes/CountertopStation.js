@@ -1,7 +1,7 @@
 import { v4 as uuid } from 'uuid'
 import { countertopStates } from '../constants'
 import { consoleLogger } from '../tools/loggers'
-import CountertopWorker from './CountertopWorker'
+import { CountertopWorker } from './CountertopWorker'
 
 class CountertopStation {
 	logger = null
