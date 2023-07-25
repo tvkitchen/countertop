@@ -1,6 +1,6 @@
 import CountertopTopology from '../CountertopTopology'
 import CountertopStation from '../CountertopStation'
-import CountertopStream from '../CountertopStream'
+import { CountertopStream } from '../CountertopStream'
 
 import {
 	generateMockAppliance,

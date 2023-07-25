@@ -1,4 +1,4 @@
-import CountertopStream from './CountertopStream'
+import { CountertopStream } from './CountertopStream'
 import {
 	getCollectiveOutputTypes,
 	getStationsThatConsumeTypes,

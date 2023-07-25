@@ -55,7 +55,7 @@ class CountertopStation {
 		if (this.getState() !== countertopStates.STOPPED) {
 			throw new Error('CountertopStations must be stopped before invoking a topology.')
 		}
-		const stationStreams = topology.streams.filter((stream) => stream.getMouth() === this)
+		const stationStreams = topology.streams.filter((stream) => stream.mouth === this)
 		this.workers = stationStreams.map((stream) => new CountertopWorker(
 			this.Appliance,
 			this.applianceSettings,
