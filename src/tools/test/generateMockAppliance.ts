@@ -34,16 +34,13 @@ export const generateMockAppliance = (
 
 	static outputTypes = attributes.outputTypes
 
-	// eslint understandably does not cover the case of "arrow function that generates a class with
-	// a constructor that properly references `this`".  So, sadly, we have to disable that rule here.
-	/* eslint-disable @typescript-eslint/unbound-method */
 	constructor(settings?: ApplianceSettings) {
 		super(settings)
-		this.healthCheck = attributes.healthCheck ?? this.healthCheck
-		this.checkPayload = attributes.checkPayload ?? this.checkPayload
-		this.start = attributes.start ?? this.start
-		this.stop = attributes.stop ?? this.stop
-		this.invoke = attributes.invoke ?? this.invoke
+		this.healthCheck = (attributes.healthCheck ?? this.healthCheck).bind(this)
+		this.checkPayload = (attributes.checkPayload ?? this.checkPayload).bind(this)
+		this.start = (attributes.start ?? this.start).bind(this)
+		this.stop = (attributes.stop ?? this.stop).bind(this)
+		this.invoke = (attributes.invoke ?? this.invoke).bind(this)
 	}
 	/* eslint-enable @typescript-eslint/unbound-method */
 }
