@@ -33,6 +33,12 @@ interface CountertopWorkerSettings {
 export class CountertopWorker {
 	public readonly id: string
 
+	public readonly ApplianceClass: ImplementedApplianceClass
+
+	public readonly applianceSettings?: ApplianceSettings
+
+	public readonly settings: CountertopWorkerSettings
+
 	readonly #consumer: Consumer
 
 	readonly #producer: Producer
@@ -40,12 +46,6 @@ export class CountertopWorker {
 	readonly #admin: Admin
 
 	readonly #appliance: AbstractAppliance
-
-	readonly ApplianceClass: ImplementedApplianceClass
-
-	readonly applianceSettings?: ApplianceSettings
-
-	readonly settings: CountertopWorkerSettings
 
 	/**
 	 * Create a new CountertopWorker.
@@ -165,7 +165,7 @@ export class CountertopWorker {
 	/**
 	 * Stop the worker and halt all data processing.
 	 */
-	stop = async (): Promise<void> => {
+	public async stop(): Promise<void> {
 		this.settings.logger?.debug(`CountertopWorker<${this.id}>: stop()`)
 		await this.#appliance.stop()
 		await this.#consumer.disconnect()
