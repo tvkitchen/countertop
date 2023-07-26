@@ -1,6 +1,6 @@
 import { Kafka } from 'kafkajs'
 import { CountertopStation } from '../CountertopStation'
-import CountertopTopology from '../CountertopTopology'
+import { CountertopTopology } from '../CountertopTopology'
 import { AbstractAppliance } from '../AbstractAppliance'
 import {
 	generateMockAppliance,

@@ -2,7 +2,7 @@ import { Kafka } from 'kafkajs'
 import { countertopStates } from '../constants'
 import { silentLogger } from '../tools/loggers'
 import { CountertopStation } from './CountertopStation'
-import CountertopTopology from './CountertopTopology'
+import { CountertopTopology } from './CountertopTopology'
 
 /**
  * The Countertop sets up and monitors stations for registered appliances to ensure the proper

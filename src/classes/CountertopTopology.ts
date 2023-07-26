@@ -1,4 +1,3 @@
-import { CountertopStream } from './CountertopStream'
 import {
 	getCollectiveOutputTypes,
 	getStationsThatConsumeTypes,
@@ -10,6 +9,8 @@ import {
 	identifyObsoleteStreams,
 	pruneStreams,
 } from '../tools/utils/countertop'
+import { CountertopStream } from './CountertopStream'
+import { CountertopStation } from './CountertopStation'
 
 /**
  * CountertopToplogies are a complete set of valid *paths* that data might take across a given
@@ -25,19 +26,69 @@ import {
  *
  * The logic for generating a CountertopTopology starts in the static `generateStreams` method.
  */
-class CountertopTopology {
-	stations = []
+export class CountertopTopology {
+	stations: CountertopStation[]
 
-	streams = []
+	streams: CountertopStream[]
 
-	/**
-	 * Create a CountertopTopology.
-	 *
-	 * @param  {CountertopStation[]} stations The stations used to define the topology.
-	 */
-	constructor(stations = []) {
+	constructor(stations: CountertopStation[] = []) {
 		this.stations = stations
 		this.streams = CountertopTopology.generateStreams(this.stations)
+	}
+
+	/**
+	 * Fully extends a set of streams to flow through a set of new stations.
+	 *
+	 * This will only create streams that pull from the same source.
+	 * This will not create streams that re-visit a given station (no loops).
+	 * This will create distinct streams for incremental steps from a source (e.g. A->B, and A->B->C).
+	 *
+	 * @param  {CountertopStream[]}  streams  The base set of streams being extended.
+	 * @param  {CountertopStation[]} stations The stations being used to extend the streams.
+	 * @return {CountertopStream[]}           The complete set of streams.
+	 */
+	public static generateStreams(
+		stations: CountertopStation[],
+		streams: CountertopStream[] = [],
+	): CountertopStream[] {
+		let nextStreams = []
+		if (streams.length === 0) {
+			nextStreams = CountertopTopology.generateSourceStreams(stations)
+		} else {
+			const extentionLength = 1 + getLongestStreamLength(streams)
+			const outputTypes = getCollectiveOutputTypes(streams)
+			const nextStations = getStationsThatConsumeTypes(stations, outputTypes)
+			nextStreams = nextStations.flatMap(
+				// Disable until countertop utilities get types
+				// eslint-disable-next-line
+				(station) => CountertopTopology.extendStreamsByStation(streams, station),
+			)
+				// Remove any new streams that aren't long enough
+				.filter((stream) => stream.getLength() === extentionLength)
+		}
+		// Prune any past streams whose tributaries are explicit subsets of new streams
+		const obsoleteStreams = identifyObsoleteStreams(streams, nextStreams)
+		// Disable until countertop utilities get types
+		// eslint-disable-next-line
+		const prunedStreams = pruneStreams(streams, obsoleteStreams)
+		// Disable until countertop utilities get types
+		// eslint-disable-next-line
+		const prunedNextStreams = pruneStreams(nextStreams, obsoleteStreams)
+
+		// If there were any new streams, iterate again
+		// Disable until countertop utilities get types
+		// eslint-disable-next-line
+		if (prunedNextStreams.length !== 0) {
+			return CountertopTopology.generateStreams(
+				stations,
+				// Disable until countertop utilities get types
+				// eslint-disable-next-line
+				prunedStreams.concat(prunedNextStreams),
+			)
+		}
+		// Disable until countertop utilities get types
+		// eslint-disable-next-line
+		return prunedStreams
 	}
 
 	/**
@@ -53,57 +104,22 @@ class CountertopTopology {
 	 * @param  {CountertopStation[]} station The station being used to extend.
 	 * @return {CountertopStream[]}          The extended streams.
 	 */
-	static extendStreamsByStation = (streams, station) => {
+	private static extendStreamsByStation(
+		streams: CountertopStream[],
+		station: CountertopStation,
+	): CountertopStream[] {
 		const streamOutputMap = getStreamOutputMap(
-			filterStreamsContainingStation(streams),
+			filterStreamsContainingStation(streams, station),
 		)
 		const tributaryMaps = generateTributaryMaps(
 			station,
 			streamOutputMap,
 		)
 		return tributaryMaps.map(
+			// Disable until countertop utilities get types
+			// eslint-disable-next-line
 			(tributaryMap) => new CountertopStream(station, tributaryMap),
 		)
-	}
-
-	/**
-	 * Fully extends a set of streams to flow through a set of new stations.
-	 *
-	 * This will only create streams that pull from the same source.
-	 * This will not create streams that re-visit a given station (no loops).
-	 * This will create distinct streams for incremental steps from a source (e.g. A->B, and A->B->C).
-	 *
-	 * @param  {CountertopStream[]}  streams  The base set of streams being extended.
-	 * @param  {CountertopStation[]} stations The stations being used to extend the streams.
-	 * @return {CountertopStream[]}           The complete set of streams.
-	 */
-	static generateStreams = (stations, streams = []) => {
-		let nextStreams = []
-		if (streams.length === 0) {
-			nextStreams = CountertopTopology.generateSourceStreams(stations)
-		} else {
-			const extentionLength = 1 + getLongestStreamLength(streams)
-			const outputTypes = getCollectiveOutputTypes(streams)
-			const nextStations = getStationsThatConsumeTypes(stations, outputTypes)
-			nextStreams = nextStations.flatMap(
-				(station) => CountertopTopology.extendStreamsByStation(streams, station),
-			)
-				// Remove any new streams that aren't long enough
-				.filter((stream) => stream.getLength() === extentionLength)
-		}
-		// Prune any past streams whose tributaries are explicit subsets of new streams
-		const obsoleteStreams = identifyObsoleteStreams(streams, nextStreams)
-		const prunedStreams = pruneStreams(streams, obsoleteStreams)
-		const prunedNextStreams = pruneStreams(nextStreams, obsoleteStreams)
-
-		// If there were any new streams, iterate again
-		if (prunedNextStreams.length !== 0) {
-			return CountertopTopology.generateStreams(
-				stations,
-				prunedStreams.concat(prunedNextStreams),
-			)
-		}
-		return prunedStreams
 	}
 
 	/**
@@ -114,8 +130,10 @@ class CountertopTopology {
 	 * @param  {CountertopStations[]} stations The stations to be processed.
 	 * @return {CountertopStreams[]}           The resulting streams.
 	 */
-	static generateSourceStreams = (stations) => getSourceStations(stations)
-		.map((station) => new CountertopStream(station))
+	private static generateSourceStreams(stations: CountertopStation[]) {
+		return getSourceStations(stations)
+			// Disable until countertop utilities get types
+			// eslint-disable-next-line
+			.map((station) => new CountertopStream(station))
+	}
 }
-
-export default CountertopTopology

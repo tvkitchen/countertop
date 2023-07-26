@@ -88,7 +88,7 @@ export const filterStreamsContainingStream = (streams, filteredStream) => stream
  * Generates a Map of type / stream[] pairs based on streams who output the types.
  *
  * @param  {CountertopStream[]} streams The CountertopStreams being mapped.
- * @return {Map}                        The resulting map of types => streams
+ * @return {Map<string, CountertopStream[]>} The resulting map of types => streams
  */
 export const getStreamOutputMap = (streams) => new Map(
 	getCollectiveOutputTypes(streams).map(

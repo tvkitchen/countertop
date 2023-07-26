@@ -1,7 +1,7 @@
 import { countertopStates } from '../../constants'
 import Countertop from '../Countertop'
 import { CountertopStation } from '../CountertopStation'
-import CountertopTopology from '../CountertopTopology'
+import { CountertopTopology } from '../CountertopTopology'
 import {
 	generateMockAppliance,
 } from '../../tools/utils/jest'

@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `CountertopWorker` now has type definitions.
 - `CountertopStream` now has type definitions.
 - `CountertopStation` now has type definitions.
+- `CountertopTopology` now has type definitions.
 
 ## [0.4.2] - 2022-07-25
 ### Fixed
