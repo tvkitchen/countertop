@@ -1,7 +1,7 @@
 import { Kafka } from 'kafkajs'
 import { countertopStates } from '../constants'
 import { silentLogger } from '../tools/loggers'
-import CountertopStation from './CountertopStation'
+import { CountertopStation } from './CountertopStation'
 import CountertopTopology from './CountertopTopology'
 
 /**

@@ -1,5 +1,5 @@
 import CountertopTopology from '../CountertopTopology'
-import CountertopStation from '../CountertopStation'
+import { CountertopStation } from '../CountertopStation'
 import { CountertopStream } from '../CountertopStream'
 
 import {

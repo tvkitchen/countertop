@@ -4,15 +4,16 @@ import {
 	getLongestStreamLength,
 	getSourcesFromStreams,
 } from '../tools/utils/countertop'
+import type { CountertopStation } from './CountertopStation'
 
 export class CountertopStream {
 	public readonly id: string
 
 	public readonly tributaries: Map<string, CountertopStream>
 
-	public readonly mouth: any // this will be a CountertopStation once defined
+	public readonly mouth: CountertopStation
 
-	public readonly source: any // this will be a CountertopStation once defined
+	public readonly source?: CountertopStation
 
 	/**
 	 * Create a new CountertopStream.
@@ -30,32 +31,24 @@ export class CountertopStream {
 	 * @param  {Map<string, CountertopStream>} tributaries The streams providing data for each input.
 	 */
 	constructor(
-		countertopStation: any, // this will be a CountertopStation once defined
+		countertopStation: CountertopStation, // this will be a CountertopStation once defined
 		tributaries = new Map<string, CountertopStream>(),
 	) {
 		Array.from(tributaries.keys()).forEach(
 			(outputType) => assert(
-				// TODO: remove this when CountertopStation has type definitions
-				// eslint-disable-next-line
 				countertopStation.getInputTypes().includes(outputType),
 				'The tributaries contained an invalid stream type.',
 			),
 		)
 		this.id = `CountertopStream::${uuid()}`
-		// TODO: remove this when CountertopStation has type definitions
-		// eslint-disable-next-line
 		this.mouth = countertopStation
 		this.tributaries = tributaries
-		// TODO: remove this when CountertopStation has type definitions
-		// eslint-disable-next-line
 		if (countertopStation.getInputTypes().length === 0) {
-			// TODO: remove this when CountertopStation has type definitions
-			// eslint-disable-next-line
 			this.source = countertopStation
 		} else {
-			// TODO: remove this when CountertopStation has type definitions
+			// TODO: remove this when getSourcesFromStreams has type definitions
 			// eslint-disable-next-line
-			this.source = getSourcesFromStreams(this.getTributaryArray()).pop() ?? null
+			this.source = getSourcesFromStreams(this.getTributaryArray()).pop()
 		}
 	}
 
@@ -83,12 +76,10 @@ export class CountertopStream {
 	 * @param  {CountertopStation} station The station being searched for.
 	 * @return {Boolean}                   The result of the search.
 	 */
-	public includesStation(station: any): boolean {
+	public includesStation(station: CountertopStation): boolean {
 		return this.mouth === station
 			|| this.getTributaryArray().some(
-				// TODO: remove this when CountertopStation has type definitions
-				// eslint-disable-next-line
-				(tributary: any) => tributary.includesStation(station),
+				(tributary) => tributary.includesStation(station),
 			)
 	}
 
@@ -104,12 +95,8 @@ export class CountertopStream {
 
 	/**
 	 * Get the output types produced by this stream.
-	 *
-	 * @return {String[]} The output types.
 	 */
-	public getOutputTypes(): any {
-		// TODO: remove this when CountertopStation has type definitions
-		// eslint-disable-next-line
+	public getOutputTypes() {
 		return this.mouth.getOutputTypes()
 	}
 }

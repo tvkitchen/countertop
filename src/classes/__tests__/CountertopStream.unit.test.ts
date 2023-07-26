@@ -1,6 +1,6 @@
 import assert from 'assert'
 import { CountertopStream } from '../CountertopStream'
-import CountertopStation from '../CountertopStation'
+import { CountertopStation } from '../CountertopStation'
 import { generateMockAppliance } from '../../tools/test'
 
 describe('CountertopStream #unit', () => {
@@ -13,7 +13,7 @@ describe('CountertopStream #unit', () => {
 			const station = new CountertopStation(Appliance)
 			const stream = new CountertopStream(station)
 			expect(stream.mouth).toBe(station)
-			expect(stream.source).toBe(null)
+			expect(stream.source).toBe(undefined)
 		})
 
 		it('Should throw an error when passed irrelevant tributaries', () => {

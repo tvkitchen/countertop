@@ -1,21 +1,18 @@
 import { Kafka } from 'kafkajs'
-import CountertopStation from '../CountertopStation'
+import { CountertopStation } from '../CountertopStation'
 import CountertopTopology from '../CountertopTopology'
+import { AbstractAppliance } from '../AbstractAppliance'
 import {
 	generateMockAppliance,
-} from '../../tools/utils/jest'
+	generateMockLogger,
+} from '../../tools/test'
 
 jest.mock('kafkajs')
 
 describe('CountertopStation #unit', () => {
 	describe('constructor', () => {
-		it('Should require an appliance', () => {
-			expect(() => new CountertopStation())
-				.toThrow()
-		})
-
 		it('Should accept a custom logger', () => {
-			const logger = {}
+			const logger = generateMockLogger()
 			const appliance = generateMockAppliance({
 				inputTypes: [],
 				outputTypes: [],
@@ -23,9 +20,12 @@ describe('CountertopStation #unit', () => {
 			const countertopStation = new CountertopStation(
 				appliance,
 				{},
-				{ logger },
+				{
+					logger,
+					kafka: new Kafka({ brokers: [] }),
+				},
 			)
-			expect(countertopStation.logger).toBe(logger)
+			expect(countertopStation.settings.logger).toBe(logger)
 		})
 	})
 
@@ -37,7 +37,7 @@ describe('CountertopStation #unit', () => {
 			})
 			const countertopStation = new CountertopStation(appliance)
 			const topology = new CountertopTopology()
-			const workers = await countertopStation.invokeTopology(topology)
+			const workers = countertopStation.invokeTopology(topology)
 			expect(workers).toEqual([])
 		})
 
@@ -49,10 +49,10 @@ describe('CountertopStation #unit', () => {
 			const countertopStation = new CountertopStation(
 				appliance,
 				{},
-				{ kafka: new Kafka() },
+				{ kafka: new Kafka({ brokers: [] }) },
 			)
 			const topology = new CountertopTopology([countertopStation])
-			const workers = await countertopStation.invokeTopology(topology)
+			const workers = countertopStation.invokeTopology(topology)
 			expect(workers.length).toEqual(1)
 		})
 	})
@@ -64,7 +64,8 @@ describe('CountertopStation #unit', () => {
 				outputTypes: [],
 			})
 			const countertopStation = new CountertopStation(appliance)
-			expect(await countertopStation.start()).toBe(true)
+			await expect(countertopStation.start())
+				.resolves.not.toThrow()
 		})
 	})
 
@@ -75,7 +76,8 @@ describe('CountertopStation #unit', () => {
 				outputTypes: [],
 			})
 			const countertopStation = new CountertopStation(appliance)
-			expect(await countertopStation.stop()).toBe(true)
+			await expect(countertopStation.stop())
+				.resolves.not.toThrow()
 		})
 	})
 
@@ -89,18 +91,22 @@ describe('CountertopStation #unit', () => {
 			expect(countertopStation.getInputTypes()).toEqual(['foo'])
 		})
 
-		it('should pass settings to appliance getInputTypes', () => {
-			const appliance = generateMockAppliance({
-				getInputTypes: (settings) => settings.inputTypes,
+		it('should pass settings when collecting input types', () => {
+			const MockAppliance = generateMockAppliance({
+				inputTypes: ['foo', 'foo2'],
+				outputTypes: ['bar'],
 			})
 			const settings = {
-				inputTypes: ['foo'],
+				inputTypeFilter: ['foo'],
 			}
 			const countertopStation = new CountertopStation(
-				appliance,
+				MockAppliance,
 				settings,
 			)
+			const getInputTypesSpy = jest.spyOn(AbstractAppliance, 'getInputTypes')
 			expect(countertopStation.getInputTypes()).toEqual(['foo'])
+			expect(getInputTypesSpy).toHaveBeenCalledWith(settings)
+			getInputTypesSpy.mockClear()
 		})
 	})
 
@@ -115,17 +121,21 @@ describe('CountertopStation #unit', () => {
 		})
 
 		it('should pass settings to appliance getOutputTypes', () => {
-			const appliance = generateMockAppliance({
-				getOutputTypes: (settings) => settings.outputTypes,
+			const MockAppliance = generateMockAppliance({
+				inputTypes: ['foo'],
+				outputTypes: ['bar', 'bar2'],
 			})
 			const settings = {
-				outputTypes: ['bar'],
+				outputTypeFilter: ['bar'],
 			}
 			const countertopStation = new CountertopStation(
-				appliance,
+				MockAppliance,
 				settings,
 			)
+			const getOutputTypesSpy = jest.spyOn(AbstractAppliance, 'getOutputTypes')
 			expect(countertopStation.getOutputTypes()).toEqual(['bar'])
+			expect(getOutputTypesSpy).toHaveBeenCalledWith(settings)
+			getOutputTypesSpy.mockClear()
 		})
 	})
 })
