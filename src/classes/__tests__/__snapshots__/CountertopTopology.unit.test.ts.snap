@@ -1,15 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`CountertopTopology #unit generateSourceStreams Should generate streams for any source stations 1`] = `
-Array [
-  Object {
-    "mouth": 0,
-    "source": 0,
-    "tributaryMap": Map {},
-  },
-]
-`;
-
 exports[`CountertopTopology #unit generateStreams Should generate the correct streams 1`] = `
 Array [
   Object {

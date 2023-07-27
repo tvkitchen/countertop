@@ -8,7 +8,7 @@ import type {
 	ImplementedApplianceClass,
 	ApplianceSettings,
 } from './AbstractAppliance'
-import type { CountertopStream } from './CountertopStream'
+import type { CountertopTopology } from './CountertopTopology'
 
 interface CountertopStationSettings {
 	logger?: Logger;
@@ -50,19 +50,17 @@ export class CountertopStation {
 	 * @return {CountertopWorker[]}         The new set of workers.
 	 */
 	public invokeTopology(
-		topology: any,
+		topology: CountertopTopology,
 	): CountertopWorker[] {
 		this.settings.logger?.debug(`CountertopStation<${this.id}>: invokeTopology()`)
 		if (this.state !== CountertopStationState.Stopped) {
 			throw new CountertopStationStateError('CountertopStations must be stopped when invoking a topology.')
 		}
 
-		// TODO: remove this when CountertopTopology has type definitions
-		// eslint-disable-next-line
 		const stationStreams = topology.streams.filter(
-			(stream: CountertopStream) => stream.mouth === this,
-		) as CountertopStream[] // This should also be removed when CountertopTopology is defined
-		this.#workers = stationStreams.map((stream: CountertopStream) => (
+			(stream) => stream.mouth === this,
+		)
+		this.#workers = stationStreams.map((stream) => (
 			new CountertopWorker(
 				this.ApplianceClass,
 				this.applianceSettings,
