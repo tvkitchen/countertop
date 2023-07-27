@@ -19,7 +19,7 @@ describe('Countertop #integration', () => {
 				inputTypes: [dataTypes.STREAM.CONTAINER],
 				outputTypes: [dataTypes.TEXT.ATOM],
 			}))
-			const topology = await countertop.updateTopology()
+			const { topology } = countertop
 			const stations = [
 				sourceAppliance,
 				captionAppliance,
@@ -41,7 +41,7 @@ describe('Countertop #integration', () => {
 				inputTypes: [dataTypes.STREAM.CONTAINER],
 				outputTypes: [dataTypes.TEXT.ATOM],
 			}))
-			const topology = await countertop.updateTopology()
+			const { topology } = countertop
 			const stations = [
 				sourceApplianceA,
 				sourceApplianceB,
@@ -68,7 +68,7 @@ describe('Countertop #integration', () => {
 				inputTypes: [dataTypes.TEXT.ATOM, 'IMAGE.JPEG'],
 				outputTypes: ['IMAGE.GIF'],
 			}))
-			const topology = await countertop.updateTopology()
+			const { topology } = countertop
 			const stations = [
 				sourceAppliance,
 				captionAppliance,
@@ -88,7 +88,7 @@ describe('Countertop #integration', () => {
 				inputTypes: [dataTypes.STREAM.CONTAINER],
 				outputTypes: [dataTypes.TEXT.ATOM, 'IMAGE.JPEG'],
 			}))
-			const topology = await countertop.updateTopology()
+			const { topology } = countertop
 			const stations = [
 				sourceAppliance,
 				complexOutputAppliance,
@@ -114,7 +114,7 @@ describe('Countertop #integration', () => {
 				inputTypes: [dataTypes.TEXT.ATOM],
 				outputTypes: [dataTypes.TEXT.SENTENCE],
 			}))
-			const topology = await countertop.updateTopology()
+			const { topology } = countertop
 			const stations = [
 				sourceAppliance,
 				complexOutputAppliance,

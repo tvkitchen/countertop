@@ -1,4 +1,5 @@
 export * from './AbstractImplementationError'
+export * from './CountertopStateError'
 export * from './CountertopStationStateError'
 export * from './ProcessingError'
 export * from './UnhealthyApplianceError'

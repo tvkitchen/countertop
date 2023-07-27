@@ -1,5 +1,5 @@
 export * from './AbstractAppliance'
-export { default as Countertop } from './Countertop'
+export * from './Countertop'
 export * from './CountertopStation'
 export * from './CountertopStream'
 export * from './CountertopTopology'
