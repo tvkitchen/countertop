@@ -9,8 +9,8 @@ import type {
 import type { FunctionSignature } from './FunctionSignature'
 
 interface MockableApplianceAttributes {
-	inputTypes?: string[];
-	outputTypes?: string[];
+	inputTypes: string[] | undefined;
+	outputTypes: string[] | undefined;
 	healthCheck?: FunctionSignature<AbstractAppliance['healthCheck']>;
 	start?: FunctionSignature<AbstractAppliance['start']>;
 	stop?: FunctionSignature<AbstractAppliance['stop']>;
@@ -24,7 +24,10 @@ interface MockableApplianceAttributes {
  * @return {Class}                        The resulting mock class.
  */
 export const generateMockAppliance = (
-	attributes: MockableApplianceAttributes = {},
+	attributes: MockableApplianceAttributes = {
+		inputTypes: [],
+		outputTypes: [],
+	},
 ): ImplementedApplianceClass => class extends BaseMockAppliance {
 	static inputTypes = attributes.inputTypes
 
